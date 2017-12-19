@@ -8,8 +8,9 @@ import java.util.ArrayList;
 public class Player {
     private int id;
     private String username;
+    private int zoneID;
 
-    Player(int id, String username) {
+    public Player(int id, String username) {
         this.id = id;
         this.username = username;
     }
@@ -20,5 +21,13 @@ public class Player {
 
     public int getId() {
         return id;
+    }
+
+    public int getZoneID() {
+        return zoneID;
+    }
+
+    public void setZoneID(int zoneID) {
+        this.zoneID = zoneID;
     }
 }

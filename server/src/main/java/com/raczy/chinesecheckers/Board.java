@@ -15,7 +15,7 @@ public class Board {
     private Map<Integer, Field> fieldMap;
     private ArrayList<Map<Integer, Field>> playerZones;
     private int playerNo;
-    static Logger logger = LogManager.getLogger();
+    private static Logger logger = LogManager.getLogger(Board.class);
 
     public Board(int playerNo) {
         this.playerNo = playerNo;
@@ -24,6 +24,15 @@ public class Board {
         this.playerZones = new ArrayList<Map<Integer, Field>>(playerNo);
     }
 
+    public void fillZone(int index, Player player) {
+        if(index >= this.getPlayerZones().size()) {
+            logger.error("Zone with that index does not exist");
+        }
+        Map<Integer, Field> zone = this.getPlayerZones().get(index);
+        for(Field f: zone.values()) {
+            f.setChecker(player);
+        }
+    }
 
     public Map<Integer, Field> getFieldMap() {
         return fieldMap;

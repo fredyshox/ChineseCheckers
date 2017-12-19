@@ -14,13 +14,13 @@ import java.util.*;
 public class StandardGameMode implements GameMode {
     private Board board;
 
-    StandardGameMode(Board board) {
+    public StandardGameMode(Board board) {
         this.board = board;
     }
 
     @Override
     public boolean playerStatus(Player player) {
-        int zoneID = Field.oppositeEdge(player.getId()); //?
+        int zoneID = Field.oppositeEdge(player.getZoneID()); //?
         Map<Integer, Field> playerZone = this.board.getPlayerZones().get(zoneID);
         boolean result = true;
 
