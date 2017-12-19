@@ -15,7 +15,7 @@ public class Field {
 
     private int id;
     private Field[] neighbours;
-    private Checker checker = null;
+    private Player player = null;
 
     public Field(int id) {
         this.id = id;
@@ -33,12 +33,12 @@ public class Field {
         return neighbours;
     }
 
-    public Checker getChecker() {
-        return checker;
+    public Player getChecker() {
+        return player;
     }
 
-    public void setChecker(Checker checker) {
-        this.checker = checker;
+    public void setChecker(Player player) {
+        this.player = player;
     }
 
     public boolean isOccupied() {

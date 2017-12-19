@@ -1,11 +1,9 @@
 package com.raczy.chinesecheckers.mode;
 
 import com.raczy.GameInfo;
-import com.raczy.Player;
+import com.raczy.chinesecheckers.Player;
 import com.raczy.chinesecheckers.Board;
-import com.raczy.chinesecheckers.Checker;
 import com.raczy.chinesecheckers.Field;
-import com.raczy.chinesecheckers.mode.GameMode;
 
 import java.util.*;
 
@@ -20,12 +18,37 @@ public class StandardGameMode implements GameMode {
         this.board = board;
     }
 
+    @Override
+    public boolean playerStatus(Player player) {
+        int zoneID = Field.oppositeEdge(player.getId()); //?
+        Map<Integer, Field> playerZone = this.board.getPlayerZones().get(zoneID);
+        boolean result = true;
+
+        for(Field f: playerZone.values()) {
+            if(f.getChecker() == null) {
+                result = false;
+                break;
+            }else {
+                Player p = f.getChecker();
+                if(p.getId() != player.getId()) {
+                    result = false;
+                    break;
+                }
+            }
+        }
+
+
+
+        return result;
+    }
+
+    @Override
     public boolean validate(Player player, GameInfo move) {
         if (!validatePresence(move.getOldFieldID())) {
             return false;
         }
 
-        Checker checker = this.board.getFieldMap().get(move.getOldFieldID()).getChecker();
+        Player checker = this.board.getFieldMap().get(move.getOldFieldID()).getChecker();
         if (!validateOwnership(player, checker)) {
             return false;
         }
@@ -41,8 +64,8 @@ public class StandardGameMode implements GameMode {
         return true;
     }
 
-    private boolean validateOwnership(Player player, Checker checker) {
-        return player.getId() == checker.getOwnerID();
+    private boolean validateOwnership(Player player, Player checker) {
+        return player.getId() == checker.getId();
     }
 
     private boolean validatePresence(int fieldID) {
