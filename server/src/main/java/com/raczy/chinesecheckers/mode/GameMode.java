@@ -4,7 +4,7 @@ package com.raczy.chinesecheckers.mode;
  * Created by kacperraczy on 12.12.2017.
  */
 
-import com.raczy.GameInfo;
+import com.raczy.chinesecheckers.GameInfo;
 import com.raczy.chinesecheckers.Player;
 
 /**

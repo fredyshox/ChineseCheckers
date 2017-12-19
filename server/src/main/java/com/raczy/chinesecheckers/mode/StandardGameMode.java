@@ -1,6 +1,6 @@
 package com.raczy.chinesecheckers.mode;
 
-import com.raczy.GameInfo;
+import com.raczy.chinesecheckers.GameInfo;
 import com.raczy.chinesecheckers.Player;
 import com.raczy.chinesecheckers.Board;
 import com.raczy.chinesecheckers.Field;
