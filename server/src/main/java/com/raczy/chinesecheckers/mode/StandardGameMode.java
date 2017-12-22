@@ -53,7 +53,7 @@ public class StandardGameMode implements GameMode {
             return false;
         }
 
-        if(!validateHomeZome(move.getOldFieldID(), move.getNewFieldID())) {
+        if(!validateHomeZome(player, move.getOldFieldID(), move.getNewFieldID())) {
             return false;
         }
 
@@ -77,8 +77,8 @@ public class StandardGameMode implements GameMode {
         return field.isOccupied();
     }
 
-    private boolean validateHomeZome(int fromId, int toId) {
-        Map<Integer, Field> homeZone = null; //TODO this.board.getPlayerZone etc
+    private boolean validateHomeZome(Player player, int fromId, int toId) {
+        Map<Integer, Field> homeZone = null; //TODO CHECK ALL ZONES OF THE OPPONENTS
 
         Field field = homeZone.get(fromId);
         if(field == null) {

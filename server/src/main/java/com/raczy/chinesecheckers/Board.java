@@ -13,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
  */
 public class Board {
     private Map<Integer, Field> fieldMap;
-    private ArrayList<Map<Integer, Field>> playerZones;
+    private Map<Integer, Map<Integer, Field>> playerZones;
     private int playerNo;
     private static Logger logger = LogManager.getLogger(Board.class);
 
@@ -21,7 +21,7 @@ public class Board {
         this.playerNo = playerNo;
 
         this.fieldMap = new HashMap<Integer, Field>();
-        this.playerZones = new ArrayList<Map<Integer, Field>>(playerNo);
+        this.playerZones = new HashMap<>(playerNo);
     }
 
     public void fillZone(int index, Player player) {
@@ -42,11 +42,11 @@ public class Board {
         this.fieldMap = fieldMap;
     }
 
-    public ArrayList<Map<Integer, Field>> getPlayerZones() {
+    public Map<Integer, Map<Integer, Field>> getPlayerZones() {
         return playerZones;
     }
 
-    public void setPlayerZones(ArrayList<Map<Integer, Field>> playerZones) {
+    public void setPlayerZones(Map<Integer, Map<Integer, Field>>playerZones) {
         this.playerZones = playerZones;
     }
 

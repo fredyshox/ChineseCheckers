@@ -19,7 +19,7 @@ public class StandardBoardBuilder extends BoardBuilder {
                                                 {56, 50, 43, 35, 26},
                                                 {26, 18, 11, 5, 0} };
     private Map<Integer, Field> mainFieldMap;
-    private ArrayList<Map<Integer, Field>> playerZonesArray = new ArrayList<Map<Integer, Field>>();
+    private Map<Integer, Map<Integer, Field>> playerZonesMap = new HashMap<>();
 
 
     @Override
@@ -90,7 +90,7 @@ public class StandardBoardBuilder extends BoardBuilder {
 
     @Override
     public void generatePlayerBoardPart(int side) {
-        if (playerZonesArray.size() > 6) {
+        if (playerZonesMap.size() > 6) {
             logger.error("playerZones", "Cannot generate another player zone. It achieved its max capacity");
             return;
         }else if(side > 5) {
@@ -116,15 +116,15 @@ public class StandardBoardBuilder extends BoardBuilder {
         //specifying edge specific hook sides
 
         Map<Integer, Field> playerFields = generatePlayerGraph(fields, edges);
-        this.playerZonesArray.add(playerFields);
+        this.playerZonesMap.put(side, playerFields);
         this.mainFieldMap.putAll(playerFields);
     }
 
     @Override
     public Board getResult() {
-        Board board = new Board(this.playerZonesArray.size());
+        Board board = new Board(this.playerZonesMap.size());
         board.setFieldMap(this.mainFieldMap);
-        board.setPlayerZones(this.playerZonesArray);
+        board.setPlayerZones(this.playerZonesMap);
 
         return board;
     }

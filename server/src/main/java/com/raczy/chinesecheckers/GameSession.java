@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -20,10 +21,20 @@ public class GameSession {
     private static Logger log = LogManager.getLogger(GameSession.class);
     private Random randomGenerator = new Random();
     private ArrayList<Player> players;
+    private int expectedPlayerCount;
+    private BoardBuilder builder;
     private Board board;
     private GameMode mode;
+    private GameSessionState state;
 
     private int queueCounter;
+
+    public GameSession(int playerNo, BoardBuilder builder) {
+        this.expectedPlayerCount = playerNo;
+        this.builder = builder;
+        this.state = GameSessionState.WAITING;
+        this.players = new ArrayList<>(playerNo);
+    }
 
     public GameSession(ArrayList<Player> players) {
         this(new StandardBoardBuilder(), players);
@@ -31,10 +42,9 @@ public class GameSession {
 
     public GameSession(BoardBuilder builder, ArrayList<Player> players) {
         this.players = players;
-        this.board = createBoard(builder, players);
-        this.mode = new StandardGameMode(this.board);
-
-        this.queueCounter = randomGenerator.nextInt(this.getMaxQueue());
+        this.builder = builder;
+        this.expectedPlayerCount = players.size();
+        this.start();
     }
 
     private Board createBoard(BoardBuilder builder, ArrayList<Player> players) {
@@ -47,28 +57,33 @@ public class GameSession {
 
         Player player;
         int i;
-        Map<Integer, Field> zone;
+        boolean opposite = false;
+        Iterator<Player> iter = players.iterator();
 
         builder.generateMainBoardPart();
-        if (playerCount != 3) {
-            for(i = 0; i<playerCount/2; i++) {
-                builder.generatePlayerBoardPart(i);
-                builder.generatePlayerBoardPart(Field.oppositeEdge(i));
-            }
-        }else {
-            i = 0;
-            do {
-                builder.generatePlayerBoardPart(i);
-                i = (i + 2) % 6;
-            }while(i != 0);
+        for(i = 0; i < 6; i++) {
+            builder.generatePlayerBoardPart(i);
         }
 
         Board board = builder.getResult();
 
-        for(i = 0; i < board.getPlayerZones().size(); i++) {
-            player = players.get(i);
-            player.setZoneID(i);
-            board.fillZone(i, player);
+        if(playerCount != 3) {
+            i = 0;
+            while(iter.hasNext()) {
+                player = iter.next();
+                player.setZoneID(i);
+                board.fillZone(i, player);
+                opposite = !opposite;
+                if(opposite) {
+                    i = Field.oppositeEdge(i);
+                }else {
+                    i = (i + 1) % 6;
+                }
+            }
+        }else {
+            //TODO Implement
+            log.error("Not implemented");
+            assert false;
         }
 
         return board;
@@ -78,22 +93,26 @@ public class GameSession {
 
 
     public void performMove(GameInfo info, GameSessionCallback callback) {
-        Player current = getCurrentPlayer();
-        if (this.mode.validate(current, info)) {
-            update(info);
+        if(this.state == GameSessionState.IN_PROGRESS) {
+            Player current = getCurrentPlayer();
+            if (this.mode.validate(current, info)) {
+                update(info);
 
-            boolean playerWon = this.mode.playerStatus(current);
-            if (playerWon) {
-                players.remove(current);
+                boolean playerWon = this.mode.playerStatus(current);
+                if (playerWon) {
+                    players.remove(current);
+                }
+
+                queueCounter++;
+
+                callback.onAccept(playerWon, info);
+            } else {
+                log.error("Forbidden move by player with id: " + current.getId());
+                GameException error = new ForbiddenMoveException();
+                callback.onError(error);
             }
-
-            queueCounter++;
-
-            callback.onAccept(playerWon, info);
         }else {
-            log.error("Forbidden move by player with id: " + current.getId());
-            GameException error = new ForbiddenMoveException();
-            callback.onError(error);
+            log.error("Game is not in progress!");
         }
     }
 
@@ -106,15 +125,36 @@ public class GameSession {
         oldf.setChecker(null);
     }
 
+    private void start() {
+        this.queueCounter = randomGenerator.nextInt(this.getMaxQueue());
+        this.board = createBoard(builder, players);
+        this.mode = new StandardGameMode(board);
+        this.state = GameSessionState.IN_PROGRESS;
+    }
+
     private int getMaxQueue() {
-        return this.players.size();
+        return this.expectedPlayerCount;
     }
 
     public Player getCurrentPlayer() {
-        int q = queueCounter % getMaxQueue();
-        //queueCounter = q
+        if (state == GameSessionState.IN_PROGRESS) {
+            int q = queueCounter % getMaxQueue();
+            //queueCounter = q
 
-        return this.players.get(q);
+            return this.players.get(q);
+        }
+        return null;
+    }
+
+    public void addPlayer(Player p) {
+        if(state == GameSessionState.WAITING) {
+            this.players.add(p);
+            if(this.players.size() == expectedPlayerCount) {
+                start();
+            }
+        }else {
+            log.error("Cannot add player. Game is in progress | done.");
+        }
     }
 
     //MARK: Getters/Setters
@@ -133,5 +173,9 @@ public class GameSession {
 
     public Board getBoard() {
         return board;
+    }
+
+    public GameSessionState getState() {
+        return state;
     }
 }
