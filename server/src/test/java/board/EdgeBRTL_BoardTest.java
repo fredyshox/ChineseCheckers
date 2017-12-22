@@ -27,7 +27,7 @@ public class EdgeBRTL_BoardTest extends BoardTest {
 
     @Test
     public void test_BottomRight_TopLeftEdge() {
-        Map<Integer, Field> firstPlayerZone = this.board.getPlayerZones().get(0);
+        Map<Integer, Field> firstPlayerZone = this.board.getPlayerZones().get(1);
         Assert.assertEquals(10, firstPlayerZone.size());
 
         int max = 0;
