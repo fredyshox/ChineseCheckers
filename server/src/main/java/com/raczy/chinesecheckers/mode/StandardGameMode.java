@@ -78,7 +78,8 @@ public class StandardGameMode implements GameMode {
     }
 
     private boolean validateHomeZome(Player player, int fromId, int toId) {
-        Map<Integer, Field> homeZone = null; //TODO CHECK ALL ZONES OF THE OPPONENTS
+        int oppositeZone = Field.oppositeEdge(player.getZoneID());
+        Map<Integer, Field> homeZone = this.board.getPlayerZones().get(oppositeZone);
 
         Field field = homeZone.get(fromId);
         if(field == null) {

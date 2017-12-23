@@ -10,6 +10,12 @@ public class GameInfo {
     private int oldFieldID;
     private int newFieldID;
 
+    public GameInfo(Date date, int oldf, int newf) {
+        this.createdAt = date;
+        this.oldFieldID = oldf;
+        this.newFieldID = newf;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }

@@ -27,12 +27,14 @@ public class GameSession {
     private GameMode mode;
     private GameSessionState state;
 
+    private ArrayList<GameSessionObserver> observers = new ArrayList<>();
+
     private int queueCounter;
 
     public GameSession(int playerNo, BoardBuilder builder) {
         this.expectedPlayerCount = playerNo;
         this.builder = builder;
-        this.state = GameSessionState.WAITING;
+        setState(GameSessionState.WAITING);
         this.players = new ArrayList<>(playerNo);
     }
 
@@ -129,7 +131,7 @@ public class GameSession {
         this.queueCounter = randomGenerator.nextInt(this.getMaxQueue());
         this.board = createBoard(builder, players);
         this.mode = new StandardGameMode(board);
-        this.state = GameSessionState.IN_PROGRESS;
+        setState(GameSessionState.IN_PROGRESS);
     }
 
     private int getMaxQueue() {
@@ -157,6 +159,20 @@ public class GameSession {
         }
     }
 
+    public void addObserver(GameSessionObserver observer) {
+        this.observers.add(observer);
+    }
+
+    public void removeObserver(GameSessionObserver observer) {
+        this.observers.remove(observer);
+    }
+
+    public void notifyObservers() {
+        for(GameSessionObserver o: observers) {
+            o.onStateChange(this, getState());
+        }
+    }
+
     //MARK: Getters/Setters
 
     public GameMode getMode() {
@@ -177,5 +193,10 @@ public class GameSession {
 
     public GameSessionState getState() {
         return state;
+    }
+
+    private void setState(GameSessionState state) {
+        this.state = state;
+        notifyObservers();
     }
 }
