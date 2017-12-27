@@ -14,19 +14,34 @@ struct BoardInfo {
     
     init? (dict: [String: Any]) {
         guard let start = dict["start"] as? Int,
-              let fields = dict["fields"] as? [Int: [String: Any]]
+              let fields = dict["fields"] as? [String: [String: Any]]
         else { return nil }
         
         self._startId = start
         
         var infoDict = [Int: FieldInfo]()
         for (key, val) in fields {
-            if let neighbours = val["neighbours"] as? [Int: String]{
-                let fieldInfo = FieldInfo(id: key , dict: neighbours)
-                infoDict[key] = fieldInfo
+            if let neighbours = val["neighbours"] as? [String: String]{
+                let converted = BoardInfo.convertDict(dict: neighbours)
+                
+                if let intKey = Int(key) {
+                    let fieldInfo = FieldInfo(id: intKey , dict: converted)
+                    infoDict[intKey] = fieldInfo
+                }
             }
         }
         self._infos = infoDict
+    }
+    
+    private static func convertDict(dict: [String: String]) -> [Int: String] {
+        var newDict = [Int:String]()
+        for(key, val) in dict {
+            if let id = Int(key) {
+                newDict[id] = val
+            }
+        }
+        
+        return newDict
     }
     
     var startId: Int {

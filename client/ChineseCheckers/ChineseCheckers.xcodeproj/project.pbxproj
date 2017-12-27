@@ -31,6 +31,8 @@
 		E252E4EC1FF2F906008DCC3D /* FieldInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E252E4EA1FF2F906008DCC3D /* FieldInfo.swift */; };
 		E252E4EE1FF2FCF2008DCC3D /* BoardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E252E4ED1FF2FCF2008DCC3D /* BoardInfo.swift */; };
 		E252E4EF1FF2FCF2008DCC3D /* BoardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E252E4ED1FF2FCF2008DCC3D /* BoardInfo.swift */; };
+		E252E4F61FF329B6008DCC3D /* grid.json in Resources */ = {isa = PBXBuildFile; fileRef = E252E4F51FF329B6008DCC3D /* grid.json */; };
+		E252E4F71FF329B6008DCC3D /* grid.json in Resources */ = {isa = PBXBuildFile; fileRef = E252E4F51FF329B6008DCC3D /* grid.json */; };
 		E25310321FF1D68C00221C78 /* HexagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21FD8931FF1CF7D00B97766 /* HexagonNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,7 @@
 		E252E4E61FF2F03F008DCC3D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		E252E4EA1FF2F906008DCC3D /* FieldInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldInfo.swift; sourceTree = "<group>"; };
 		E252E4ED1FF2FCF2008DCC3D /* BoardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardInfo.swift; sourceTree = "<group>"; };
+		E252E4F51FF329B6008DCC3D /* grid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = grid.json; path = ../../../server/grid.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,7 @@
 		E21FD85E1FF13D7F00B97766 /* ChineseCheckers Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E252E4F51FF329B6008DCC3D /* grid.json */,
 				E252E4E91FF2F17D008DCC3D /* Logic */,
 				E21FD85F1FF13D7F00B97766 /* Actions.sks */,
 				E21FD8601FF13D7F00B97766 /* GameScene.sks */,
@@ -225,6 +229,7 @@
 				E21FD8851FF13D7F00B97766 /* GameScene.sks in Resources */,
 				E21FD8701FF13D7F00B97766 /* Main.storyboard in Resources */,
 				E21FD8831FF13D7F00B97766 /* Actions.sks in Resources */,
+				E252E4F61FF329B6008DCC3D /* grid.json in Resources */,
 				E21FD8731FF13D7F00B97766 /* LaunchScreen.storyboard in Resources */,
 				E21FD8891FF13D7F00B97766 /* Assets.xcassets in Resources */,
 			);
@@ -237,6 +242,7 @@
 				E21FD8811FF13D7F00B97766 /* Main.storyboard in Resources */,
 				E21FD8861FF13D7F00B97766 /* GameScene.sks in Resources */,
 				E21FD88A1FF13D7F00B97766 /* Assets.xcassets in Resources */,
+				E252E4F71FF329B6008DCC3D /* grid.json in Resources */,
 				E21FD8841FF13D7F00B97766 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

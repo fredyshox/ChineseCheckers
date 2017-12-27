@@ -72,6 +72,7 @@ class Board {
         generateFields(arr: created, infos: infos)
     }
     
+    //Returns Field objects that have created
     private func addField(info: FieldInfo) -> [Field] {
         var createdFields: [Field] = []
         

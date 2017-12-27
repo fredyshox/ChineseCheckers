@@ -9,17 +9,23 @@
 import SpriteKit
 
 class HexagonNode: SKShapeNode {
+    private let _radius: CGFloat
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("Not implemented")
     }
     
     init(size: CGFloat) {
+        self._radius = size/2
         super.init()
         
-        let path = hexagonPath(radius: size/2)
+        let path = hexagonPath(radius: _radius)
         
         self.path = path
+    }
+    
+    var radius: CGFloat {
+        return _radius
     }
 
     func hexagonPath(radius: CGFloat) -> CGPath {

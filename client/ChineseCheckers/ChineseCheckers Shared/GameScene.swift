@@ -16,6 +16,7 @@ class GameScene: SKScene {
     fileprivate var board: Board!
     
     fileprivate static let hexSize: CGFloat = 40
+    fileprivate static let hexOffset: CGFloat = 5
 
     
     class func newGameScene() -> GameScene {
@@ -25,6 +26,17 @@ class GameScene: SKScene {
             abort()
         }
         
+        if let path = Bundle.main.path(forResource: "grid", ofType: "json") {
+            let url = URL(fileURLWithPath: path)
+            let data = try! Data(contentsOf: url)
+            let json = try! JSONSerialization.jsonObject(with: data)
+            if let item = json as? [String: Any] {
+                if let boardInfo = BoardInfo(dict: item) {
+                    scene.board = Board(info: boardInfo)
+                }
+            }
+        }
+        
         // Set the scale mode to scale to fit the window
         scene.scaleMode = .aspectFill
         
@@ -32,42 +44,68 @@ class GameScene: SKScene {
     }
     
     func setUpScene() {
-        let node = HexagonNode(size: 40)
-        node.position = CGPoint(x: self.frame.midX,
-                                y: self.frame.midY)
-        node.fillColor = NSColor.red
-        self.addChild(node)
+        setUpBoard()
     }
     
     func setUpBoard() {
         let startId = self.board.boardInfo.startId
-        let startField = self.board.fields[startId]
+        let startField = self.board.fields[startId]!
         
-        var center = CGPoint(x: self.frame.midX,
+        let center = CGPoint(x: self.frame.midX,
                              y: self.frame.midY)
-        var node = createFieldHex(id: hexName(id: startId))
+        let node = createFieldHex(id: hexName(id: startId))
         node.position = center
+        self.addChild(node)
         
-        
-        
+        createNeighbours(arr: [startField])
     }
     
-    func createNeighbours(field: Field) {
+    func createNeighbours(arr: [Field]) {
+        if arr.count == 0 {
+            return
+        }
+        
+        var created: [Field] = []
+        for field in arr {
+            created.append(contentsOf: createNeighboursHex(field: field))
+        }
+        
+        createNeighbours(arr: created)
+    }
+    
+    func createNeighboursHex(field: Field) -> [Field] {
+        var createdFields: [Field] = []
+        
         let hexName: String = self.hexName(id: field.id)
-        guard let hexNode = self.childNode(withName: hexName)
-        else {return}
+        guard let hexNode = self.childNode(withName: hexName) as? HexagonNode
+        else {return [] /*ERROR*/}
         
         var tempName: String
         
-        for (index, n) in field.neighbours.enumerated() {
-            if let neighbour = n{
+        for direction in Field.Direction.allValues {
+            if let neighbour = field.getNeighbour(dir: direction) {
                 tempName = self.hexName(id: neighbour.id)
                 if self.childNode(withName: tempName) == nil {
                     let newNode = createFieldHex(id: tempName)
+                    newNode.position = offsetPosition(hex: hexNode, dir: direction)
+                    self.addChild(newNode)
                     
+                    createdFields.append(neighbour)
                 }
             }
         }
+        
+        return createdFields
+    }
+    
+    func offsetPosition(hex: HexagonNode, dir: Field.Direction) -> CGPoint {
+        let angleDeg: CGFloat = CGFloat(dir.rawValue) * 60
+        let angleRad: CGFloat = CGFloat.pi * angleDeg / 180
+        
+        let result = CGPoint(x: 2 * hex.radius * cos(angleRad) + hex.position.x,
+                             y: 2 * hex.radius * sin(angleRad) + hex.position.y )
+        
+        return result
     }
     
     

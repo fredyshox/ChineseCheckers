@@ -21,9 +21,11 @@ class Field {
         func opposite() ->Direction {
             let val = (self.rawValue + 3) % 6
             let dir = Direction(rawValue: val)!
-            
+    
             return dir
         }
+        
+        static let allValues: [Direction] = [topRight, right, bottomRight, bottomLeft, left ,topLeft]
     }
     
     private let _id: Int
