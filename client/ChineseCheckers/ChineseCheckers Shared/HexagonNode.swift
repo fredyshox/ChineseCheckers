@@ -9,7 +9,8 @@
 import SpriteKit
 
 class HexagonNode: SKShapeNode {
-    private let _radius: CGFloat
+    fileprivate let _radius: CGFloat
+    fileprivate var _delegate: HexagonNodeDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("Not implemented")
@@ -26,6 +27,16 @@ class HexagonNode: SKShapeNode {
     
     var radius: CGFloat {
         return _radius
+    }
+    
+    var delegate: HexagonNodeDelegate? {
+        get{
+            return _delegate
+        }
+        set{
+            self._delegate = newValue
+            self.isUserInteractionEnabled = (newValue != nil)
+        }
     }
 
     func hexagonPath(radius: CGFloat) -> CGPath {
@@ -51,4 +62,19 @@ class HexagonNode: SKShapeNode {
         
         return result
     }
+    
 }
+
+#if os(iOS)
+extension HexagonNode {
+    //recognize signle tap
+}
+#endif
+
+#if os(OSX)
+extension HexagonNode {
+    override func mouseDown(with event: NSEvent) {
+        self._delegate?.hexNodeClicked(self)
+    }
+}
+#endif

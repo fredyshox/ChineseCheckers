@@ -8,15 +8,9 @@
 
 import Foundation
 
-class BoardInfoError: Error {
-    var localizedDescription: String {
-        return "Corrupted BoardInfo object"
-    }
-}
-
 class Board {
-    private var _fields = [Int: Field]()
-    private var _info: BoardInfo
+    private var _fields: [Int: Field]
+    private var _startID: Int
     
     
     var fields:  [Int: Field] {
@@ -28,84 +22,19 @@ class Board {
         }
     }
     
-    var boardInfo: BoardInfo {
-        return _info
-    }
-    
-    init? (info: BoardInfo) {
-        do {
-            self._info = info
-            try generateBoard(info: info)
-        } catch let e as BoardInfoError{
-            print("Error caught: \(e.localizedDescription)")
-            return nil
-        }catch {
-            return nil
+    var startID: Int {
+        get{
+            return _startID
+        }
+        set{
+            _startID = newValue
         }
     }
     
-    private func generateBoard(info: BoardInfo) throws {
-        let infoDict = info.infos
-        let startId = info.startId
-        guard let startFieldInfo = infoDict[startId]
-        else {
-            throw BoardInfoError()
-        }
-        let startField = Field(id: startFieldInfo.id)
-        let fieldArr: [Field] = [startField]
-        
-        generateFields(arr: fieldArr, infos: infoDict)
+    init(startID: Int) {
+        self._startID = startID
+        self._fields = [Int: Field]()
     }
     
-    private func generateFields(arr: [Field], infos: [Int: FieldInfo]) {
-        if arr.count == 0 {
-            return
-        }
-        
-        var created: [Field] = []
-        for field in arr {
-            if let info = infos[field.id] {
-                created.append(contentsOf: addField(info: info))
-            }
-        }
-        
-        generateFields(arr: created, infos: infos)
-    }
-    
-    //Returns Field objects that have created
-    private func addField(info: FieldInfo) -> [Field] {
-        var createdFields: [Field] = []
-        
-        var field: Field
-        if let f = self._fields[info.id] {
-            field = f
-        }else {
-            field = Field(id: info.id)
-        }
-        
-        self._fields[info.id] = field
-        
-        for(key, val) in info.neighbours {
-            if let neighbourId = Int(val) {
-                guard let dir = Field.Direction(rawValue: key)
-                    else {
-                        print("Error while parsing server board")
-                        return []
-                }
-                
-                if let neighbour = self._fields[neighbourId] {
-                    field.setNeighbour(dir: dir, field: neighbour)
-                }else {
-                    let neighbour = Field(id: neighbourId)
-                    field.setNeighbour(dir: dir, field: neighbour)
-                    
-                    createdFields.append(neighbour)
-                    self._fields[neighbourId] = neighbour
-                }
-            }
-        }
-        
-        return createdFields
-    }
     
 }

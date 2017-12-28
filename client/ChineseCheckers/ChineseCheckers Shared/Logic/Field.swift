@@ -30,10 +30,16 @@ class Field {
     
     private let _id: Int
     private var _neighbours: [Field?]
+    private var _player: Player?
     
     init(id: Int) {
         self._id = id
         self._neighbours = [Field?](repeating: nil, count: 6)
+    }
+    
+    convenience init(_ id: Int, player: Player?) {
+        self.init(id: id)
+        self.player = player
     }
     
     var id: Int {
@@ -42,6 +48,19 @@ class Field {
     
     var neighbours: [Field?] {
         return self._neighbours
+    }
+    
+    var player: Player? {
+        get{
+            return _player
+        }
+        set{
+            self._player = newValue
+        }
+    }
+    
+    var isOccupied: Bool {
+        return self._player != nil
     }
     
     func getNeighbour(dir: Direction) -> Field? {

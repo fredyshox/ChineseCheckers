@@ -8,6 +8,12 @@
 
 import Foundation
 
+class BoardInfoError: Error {
+    var localizedDescription: String {
+        return "Corrupted BoardInfo object"
+    }
+}
+
 struct BoardInfo {
     private let _startId: Int
     private let _infos: [Int: FieldInfo]
@@ -22,10 +28,11 @@ struct BoardInfo {
         var infoDict = [Int: FieldInfo]()
         for (key, val) in fields {
             if let neighbours = val["neighbours"] as? [String: String]{
+                let player = val["player"] as? Int
                 let converted = BoardInfo.convertDict(dict: neighbours)
                 
                 if let intKey = Int(key) {
-                    let fieldInfo = FieldInfo(id: intKey , dict: converted)
+                    let fieldInfo = FieldInfo(id: intKey , dict: converted, player: player)
                     infoDict[intKey] = fieldInfo
                 }
             }
