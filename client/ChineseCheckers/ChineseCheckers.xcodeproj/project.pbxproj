@@ -44,6 +44,10 @@
 		E252E4F61FF329B6008DCC3D /* grid.json in Resources */ = {isa = PBXBuildFile; fileRef = E252E4F51FF329B6008DCC3D /* grid.json */; };
 		E252E4F71FF329B6008DCC3D /* grid.json in Resources */ = {isa = PBXBuildFile; fileRef = E252E4F51FF329B6008DCC3D /* grid.json */; };
 		E25310321FF1D68C00221C78 /* HexagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21FD8931FF1CF7D00B97766 /* HexagonNode.swift */; };
+		E2675CDC1FF5C75300E49AE7 /* GameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CDB1FF5C75300E49AE7 /* GameInfo.swift */; };
+		E2675CDD1FF5C94A00E49AE7 /* GameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CDB1FF5C75300E49AE7 /* GameInfo.swift */; };
+		E2675CDF1FF5D28500E49AE7 /* GameSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */; };
+		E2675CE01FF5D36900E49AE7 /* GameSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +79,8 @@
 		E252E4EA1FF2F906008DCC3D /* FieldInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldInfo.swift; sourceTree = "<group>"; };
 		E252E4ED1FF2FCF2008DCC3D /* BoardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardInfo.swift; sourceTree = "<group>"; };
 		E252E4F51FF329B6008DCC3D /* grid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = grid.json; path = ../../../server/grid.json; sourceTree = "<group>"; };
+		E2675CDB1FF5C75300E49AE7 /* GameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfo.swift; sourceTree = "<group>"; };
+		E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSessionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,14 +181,24 @@
 		E252E4E91FF2F17D008DCC3D /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				E2675CE11FF5D93300E49AE7 /* Info */,
 				E252E4E31FF2ED4A008DCC3D /* Field.swift */,
 				E252E4E61FF2F03F008DCC3D /* Board.swift */,
-				E252E4EA1FF2F906008DCC3D /* FieldInfo.swift */,
-				E252E4ED1FF2FCF2008DCC3D /* BoardInfo.swift */,
 				E240262D1FF45D960069D0FA /* Player.swift */,
 				E24026471FF477D60069D0FA /* GameSession.swift */,
+				E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */,
 			);
 			path = Logic;
+			sourceTree = "<group>";
+		};
+		E2675CE11FF5D93300E49AE7 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				E252E4EA1FF2F906008DCC3D /* FieldInfo.swift */,
+				E252E4ED1FF2FCF2008DCC3D /* BoardInfo.swift */,
+				E2675CDB1FF5C75300E49AE7 /* GameInfo.swift */,
+			);
+			path = Info;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,11 +312,13 @@
 			files = (
 				E240263E1FF461E50069D0FA /* Foundation+Extensions.swift in Sources */,
 				E252E4E41FF2ED4A008DCC3D /* Field.swift in Sources */,
+				E2675CDF1FF5D28500E49AE7 /* GameSessionDelegate.swift in Sources */,
 				E21FD8941FF1CF7D00B97766 /* HexagonNode.swift in Sources */,
 				E252E4E71FF2F03F008DCC3D /* Board.swift in Sources */,
 				E21FD8871FF13D7F00B97766 /* GameScene.swift in Sources */,
 				E252E4EB1FF2F906008DCC3D /* FieldInfo.swift in Sources */,
 				E21FD86D1FF13D7F00B97766 /* GameViewController.swift in Sources */,
+				E2675CDC1FF5C75300E49AE7 /* GameInfo.swift in Sources */,
 				E24026491FF47A0F0069D0FA /* GameSession.swift in Sources */,
 				E24026441FF473B90069D0FA /* HexagonNodeDelegate.swift in Sources */,
 				E252E4EE1FF2FCF2008DCC3D /* BoardInfo.swift in Sources */,
@@ -316,11 +334,13 @@
 			files = (
 				E252E4E51FF2EDB5008DCC3D /* Field.swift in Sources */,
 				E25310321FF1D68C00221C78 /* HexagonNode.swift in Sources */,
+				E2675CE01FF5D36900E49AE7 /* GameSessionDelegate.swift in Sources */,
 				E252E4E81FF2F03F008DCC3D /* Board.swift in Sources */,
 				E21FD8881FF13D7F00B97766 /* GameScene.swift in Sources */,
 				E252E4EC1FF2F906008DCC3D /* FieldInfo.swift in Sources */,
 				E21FD87E1FF13D7F00B97766 /* GameViewController.swift in Sources */,
 				E252E4EF1FF2FCF2008DCC3D /* BoardInfo.swift in Sources */,
+				E2675CDD1FF5C94A00E49AE7 /* GameInfo.swift in Sources */,
 				E24026481FF477D60069D0FA /* GameSession.swift in Sources */,
 				E24026431FF471D00069D0FA /* HexagonNodeDelegate.swift in Sources */,
 				E24026461FF474550069D0FA /* GameSceneState.swift in Sources */,

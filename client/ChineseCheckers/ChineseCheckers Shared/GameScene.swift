@@ -13,18 +13,34 @@ class GameScene: SKScene {
     
     fileprivate var label : SKLabelNode?
     fileprivate var spinnyNode : SKShapeNode?
-    fileprivate var session: GameSession!
+    fileprivate var _session: GameSession!
+    fileprivate var _state: GameSceneState = OffState.shared
     
     fileprivate static let hexSize: CGFloat = 40
     fileprivate static let hexOffset: CGFloat = 5
+    public static let moveDuration: TimeInterval = 0.3
+    
 
-    fileprivate var board: Board {
-        return self.session.board
+    public var board: Board {
+        return self._session.board
+    }
+    
+    public var state: GameSceneState {
+        get {
+            return _state
+        }
+        set {
+            _state = newValue
+        }
+    }
+    
+    public var session: GameSession {
+        return _session
     }
     
     //temporary (until game logic is done)
     fileprivate var player: Player {
-        return self.session.players.first!
+        return self._session.players.first!
     }
     
     class func newGameScene() -> GameScene {
@@ -48,7 +64,7 @@ class GameScene: SKScene {
                     }
                     
                     if let boardInfo = BoardInfo(dict: item) {
-                        scene.session = GameSession(binfo: boardInfo, players: players)
+                        scene._session = GameSession(binfo: boardInfo, players: players)
                     }
                 }
             }
@@ -63,6 +79,8 @@ class GameScene: SKScene {
     func setUpScene() {
         setUpBoard()
     }
+    
+    //MARK: Board creation & drawing
     
     func setUpBoard() {
         let startId = self.board.startID
@@ -150,6 +168,50 @@ class GameScene: SKScene {
         return node
     }
     
+    func createFieldHex(id: String) -> HexagonNode{
+        let node = HexagonNode(size: GameScene.hexSize)
+        node.name = id
+        node.fillColor = GameScene.fieldColor
+//        
+//        if let index = hexIndex(checkerName: id) {
+//            node.index = index
+//        }
+        
+        return node
+    }
+    
+    //MARK: Utility functions
+    
+    func findCheckerHex(point: CGPoint) -> HexagonNode? {
+        let nodes = self.nodes(at: point)
+        var hex: HexagonNode? = nil
+        for f in nodes {
+            if let hexNode = f as? HexagonNode, let name = hexNode.name {
+                if name.starts(with: "ch_") {
+                    hex = hexNode
+                    break
+                }
+            }
+        }
+        
+        return hex
+    }
+ 
+    func findFieldHex(point: CGPoint) -> HexagonNode? {
+        let nodes = self.nodes(at: point)
+        var hex: HexagonNode? = nil
+        for f in nodes {
+            if let hexNode = f as? HexagonNode, let name = hexNode.name {
+                if name.starts(with: "h_") {
+                    hex = hexNode
+                    break
+                }
+            }
+        }
+        
+        return hex
+    }
+    
     func hexName(id: Int) -> String {
         return "h_\(id)"
     }
@@ -171,23 +233,20 @@ class GameScene: SKScene {
         return result
     }
     
-    func createFieldHex(id: String) -> HexagonNode{
-        let node = HexagonNode(size: GameScene.hexSize)
-        node.name = id
-        node.fillColor = NSColor.blue
-        
-        return node
-    }
-    
+    //MARK: Colors & Graphics
     
     #if os(iOS)
-    func checkerColor(zone: Int) -> UIColor{
-        let colors = ["#00077A", "#03BD5B", "#BF0A46", "#FF9947", "#A939B9", "#000000"]
-        let hexString = colors[zone % 6]
+    public static let fieldColor: UIColor = UIColor.hexStringToUIColor(hex: "#EBEBEB")
     
-        return UIColor.hexStringToUIColor(hex: hexString)
+    func checkerColor(zone: Int) -> UIColor{
+    let colors = ["#00077A", "#03BD5B", "#BF0A46", "#FF9947", "#A939B9", "#000000"]
+    let hexString = colors[zone % 6]
+    
+    return UIColor.hexStringToUIColor(hex: hexString)
     }
     #elseif os(OSX)
+    public static let fieldColor: NSColor = NSColor.hexStringToNSColor(hex: "#EBEBEB")
+    
     func checkerColor(zone: Int) -> NSColor {
         let colors = ["#00077A", "#03BD5B", "#BF0A46", "#FF9947", "#A939B9", "#000000"]
         let hexString = colors[zone % 6]
@@ -197,15 +256,16 @@ class GameScene: SKScene {
     #endif
     
     
-    #if os(watchOS)
-    override func sceneDidLoad() {
-        self.setUpScene()
+    //MARK: Board manipulation
+    
+    func updateBoard(checker: HexagonNode, to field: HexagonNode) {
+        let action = SKAction.move(to: field.position, duration: GameScene.moveDuration)
+        checker.run(action)
     }
-    #else
+    
     override func didMove(to view: SKView) {
         self.setUpScene()
     }
-    #endif
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
@@ -214,30 +274,32 @@ class GameScene: SKScene {
 
 extension GameScene: HexagonNodeDelegate {
     func hexNodeClicked(_ node: HexagonNode) {
-        let nodes = self.nodes(at: node.position)
-        var hex: HexagonNode? = nil
-        for f in nodes {
-            if let hexNode = f as? HexagonNode, let name = hexNode.name {
-                if name.starts(with: "h_") {
-                    hex = hexNode
-                    break
-                }
-            }
+        guard let nodeName = node.name else {return}
+        
+        if nodeName.starts(with: "ch_") {
+            self.state.setPossibleVisibility(scene: self, hex: node)
+        }else if nodeName.starts(with: "h_") {
+            self.state.performMove(scene: self, to: node)
         }
         
-        guard let fieldHex = hex else {return}
+    }
+}
+
+extension GameScene: GameSessionDelegate {
+    func turnChanges(session: GameSession, player: Player) {
         
-        if let idx = hexIndex(checkerName: fieldHex.name!),
-            let field = self.session.board.fields[idx] {
-            let possible = self.session.possibleMoves(from: field)
-            for p in possible {
-                if let node = self.childNode(withName: hexName(id: p.id)) as? HexagonNode {
-                    node.lineWidth = 4.0
-                    node.strokeColor = NSColor.red
-                }
-            }
-        }
+    }
+    
+    func boardChanged(session: GameSession, info: GameInfo) {
+        let fromFieldName = hexName(id: info.oldFieldID)
+        let destFieldName = hexName(id: info.newFieldID)
         
+        guard let fromField = self.childNode(withName: fromFieldName) as? HexagonNode,
+              let destField = self.childNode(withName: destFieldName) as? HexagonNode,
+              let checker = self.findCheckerHex(point: fromField.position)
+        else {return}
+        
+        updateBoard(checker: checker, to: destField)
     }
 }
 

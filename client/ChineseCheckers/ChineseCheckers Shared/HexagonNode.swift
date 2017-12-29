@@ -75,6 +75,7 @@ extension HexagonNode {
 extension HexagonNode {
     override func mouseDown(with event: NSEvent) {
         self._delegate?.hexNodeClicked(self)
+        print("Clicked: \(self.name!)")
     }
 }
 #endif
