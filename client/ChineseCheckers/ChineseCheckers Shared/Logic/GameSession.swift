@@ -11,6 +11,8 @@ import Foundation
 class GameSession {
     private let _board: Board
     private let _players: [Player]
+    private var _delegate: GameSessionDelegate?
+    private var _currentPlayer: Player!
     
     init? (binfo: BoardInfo, players: [Player]) {
         do {
@@ -29,10 +31,31 @@ class GameSession {
         return _board
     }
     
+    //MARK: Delegate
+    
+    var delegate: GameSessionDelegate? {
+        get{
+            return self._delegate
+        }
+        set{
+            self._delegate = newValue
+        }
+    }
+    
     //MARK: Players
     
     var players: [Player] {
         return _players
+    }
+    
+    var currentPlayer: Player {
+        get {
+            return _currentPlayer
+        }
+        set{
+            _currentPlayer = newValue
+            self._delegate?.turnChanges(session: self, player: newValue)
+        }
     }
     
     public func findPlayer(zoneID: Int) -> Player? {
@@ -164,6 +187,18 @@ class GameSession {
         return nil
     }
     
-    
+    //should be used only by server service
+    func performMove(info: GameInfo) {
+        guard let fromField = self.board.fields[info.oldFieldID],
+              let player = fromField.player,
+              let toField = self.board.fields[info.newFieldID]
+        else {return}
+        
+        print("moving")
+        fromField.player = nil
+        toField.player = player
+        
+        self._delegate?.boardChanged(session: self, info: info)
+    }
     
 }
