@@ -20,14 +20,26 @@ extension GameSceneState {
         scene.state = state
     }
 }
-
-
-
-class OffState: GameSceneState {
-    private static var _shared: OffState?
+// TODO implementation
+class WaitingState: GameSceneState {
+    private static var _shared: WaitingState?
     public static var shared: GameSceneState {
         if _shared == nil {
-            _shared = OffState()
+            _shared = WaitingState()
+        }
+        
+        return _shared!
+    }
+    
+    func performMove(scene: GameScene, to hex: HexagonNode) { }
+    func setPossibleVisibility(scene: GameScene, hex: HexagonNode) { }
+}
+
+class ListeningState: GameSceneState {
+    private static var _shared: ListeningState?
+    public static var shared: GameSceneState {
+        if _shared == nil {
+            _shared = ListeningState()
         }
         
         return _shared!
@@ -39,7 +51,7 @@ class OffState: GameSceneState {
     
     func setUpPossibleHex(scene: GameScene, hex: HexagonNode) {
         hex.delegate = scene
-        hex.lineWidth = 4.0
+        hex.lineWidth = GameScene.selectionLineWidth
         hex.strokeColor = NSColor.red
     }
     
@@ -55,18 +67,18 @@ class OffState: GameSceneState {
             }
         }
         
-        (OnState.shared as! OnState).checker = hex
-        self.changeState(scene: scene, state: OnState.shared)
+        (SelectedHexState.shared as! SelectedHexState).checker = hex
+        self.changeState(scene: scene, state: SelectedHexState.shared)
     }
 }
 
-class OnState: GameSceneState {
-    private static var _shared: OnState?
+class SelectedHexState: GameSceneState {
+    private static var _shared: SelectedHexState?
     private var _checker: HexagonNode?
     
     public static var shared: GameSceneState {
         if _shared == nil {
-            _shared = OnState()
+            _shared = SelectedHexState()
         }
         
         return _shared!
@@ -112,7 +124,7 @@ class OnState: GameSceneState {
             }
         }
         
-        changeState(scene: scene, state: OffState.shared)
+        changeState(scene: scene, state: ListeningState.shared)
     }
     
     func changeState(scene: GameScene, state: GameSceneState) {

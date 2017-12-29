@@ -18,6 +18,7 @@ class GameScene: SKScene {
     
     fileprivate static let hexSize: CGFloat = 40
     fileprivate static let hexOffset: CGFloat = 5
+    public static let selectionLineWidth: CGFloat = 2.0
     public static let moveDuration: TimeInterval = 0.3
     
 
@@ -176,7 +177,6 @@ class GameScene: SKScene {
 //        if let index = hexIndex(checkerName: id) {
 //            node.index = index
 //        }
-        
         return node
     }
     

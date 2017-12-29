@@ -48,6 +48,8 @@
 		E2675CDD1FF5C94A00E49AE7 /* GameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CDB1FF5C75300E49AE7 /* GameInfo.swift */; };
 		E2675CDF1FF5D28500E49AE7 /* GameSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */; };
 		E2675CE01FF5D36900E49AE7 /* GameSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */; };
+		E2675CE31FF5DD4000E49AE7 /* FieldHexagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CE21FF5DD4000E49AE7 /* FieldHexagonNode.swift */; };
+		E2675CE41FF5DF4100E49AE7 /* FieldHexagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CE21FF5DD4000E49AE7 /* FieldHexagonNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +83,7 @@
 		E252E4F51FF329B6008DCC3D /* grid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = grid.json; path = ../../../server/grid.json; sourceTree = "<group>"; };
 		E2675CDB1FF5C75300E49AE7 /* GameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfo.swift; sourceTree = "<group>"; };
 		E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSessionDelegate.swift; sourceTree = "<group>"; };
+		E2675CE21FF5DD4000E49AE7 /* FieldHexagonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldHexagonNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,7 @@
 				E21FD8611FF13D7F00B97766 /* GameScene.swift */,
 				E21FD8621FF13D7F00B97766 /* Assets.xcassets */,
 				E21FD8931FF1CF7D00B97766 /* HexagonNode.swift */,
+				E2675CE21FF5DD4000E49AE7 /* FieldHexagonNode.swift */,
 				E24026421FF471D00069D0FA /* HexagonNodeDelegate.swift */,
 				E24026451FF474550069D0FA /* GameSceneState.swift */,
 			);
@@ -315,6 +319,7 @@
 				E2675CDF1FF5D28500E49AE7 /* GameSessionDelegate.swift in Sources */,
 				E21FD8941FF1CF7D00B97766 /* HexagonNode.swift in Sources */,
 				E252E4E71FF2F03F008DCC3D /* Board.swift in Sources */,
+				E2675CE31FF5DD4000E49AE7 /* FieldHexagonNode.swift in Sources */,
 				E21FD8871FF13D7F00B97766 /* GameScene.swift in Sources */,
 				E252E4EB1FF2F906008DCC3D /* FieldInfo.swift in Sources */,
 				E21FD86D1FF13D7F00B97766 /* GameViewController.swift in Sources */,
@@ -337,6 +342,7 @@
 				E2675CE01FF5D36900E49AE7 /* GameSessionDelegate.swift in Sources */,
 				E252E4E81FF2F03F008DCC3D /* Board.swift in Sources */,
 				E21FD8881FF13D7F00B97766 /* GameScene.swift in Sources */,
+				E2675CE41FF5DF4100E49AE7 /* FieldHexagonNode.swift in Sources */,
 				E252E4EC1FF2F906008DCC3D /* FieldInfo.swift in Sources */,
 				E21FD87E1FF13D7F00B97766 /* GameViewController.swift in Sources */,
 				E252E4EF1FF2FCF2008DCC3D /* BoardInfo.swift in Sources */,
