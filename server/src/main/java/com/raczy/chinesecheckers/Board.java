@@ -1,6 +1,5 @@
 package com.raczy.chinesecheckers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,12 +24,13 @@ public class Board {
     }
 
     public void fillZone(int index, Player player) {
-        if(index >= this.getPlayerZones().size()) {
-            logger.error("Zone with that index does not exist");
-        }
         Map<Integer, Field> zone = this.getPlayerZones().get(index);
-        for(Field f: zone.values()) {
-            f.setChecker(player);
+        if (zone != null) {
+            for (Field f : zone.values()) {
+                f.setChecker(player);
+            }
+        }else {
+            logger.error("Zone with that index does not exist. Index = " + index);
         }
     }
 

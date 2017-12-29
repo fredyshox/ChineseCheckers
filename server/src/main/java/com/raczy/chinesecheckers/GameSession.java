@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -105,9 +104,9 @@ public class GameSession {
                     players.remove(current);
                 }
 
-                queueCounter++;
-
                 callback.onAccept(playerWon, info);
+
+                nextPlayer();
             } else {
                 log.error("Forbidden move by player with id: " + current.getId());
                 GameException error = new ForbiddenMoveException();
@@ -118,6 +117,11 @@ public class GameSession {
         }
     }
 
+    private void nextPlayer() {
+        queueCounter++;
+        notifyTurnChanges();
+    }
+
     private void update(GameInfo info) {
         Field oldf = this.board.getFieldMap().get(info.getOldFieldID());
         Field newf = this.board.getFieldMap().get(info.getNewFieldID());
@@ -125,6 +129,8 @@ public class GameSession {
         Player player = oldf.getChecker();
         newf.setChecker(player);
         oldf.setChecker(null);
+
+        notifyBoardUpdate(info);
     }
 
     private void start() {
@@ -167,9 +173,21 @@ public class GameSession {
         this.observers.remove(observer);
     }
 
-    public void notifyObservers() {
+    public void notifyStateChanged() {
         for(GameSessionObserver o: observers) {
             o.onStateChange(this, getState());
+        }
+    }
+
+    public void notifyTurnChanges() {
+        for(GameSessionObserver o: observers) {
+            o.onPlayerChange(this, getCurrentPlayer());
+        }
+    }
+
+    public void notifyBoardUpdate(GameInfo info) {
+        for(GameSessionObserver o: observers) {
+            o.onBoardUpdate(this, info);
         }
     }
 
@@ -197,6 +215,6 @@ public class GameSession {
 
     private void setState(GameSessionState state) {
         this.state = state;
-        notifyObservers();
+        notifyStateChanged();
     }
 }

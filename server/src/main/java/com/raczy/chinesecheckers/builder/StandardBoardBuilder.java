@@ -4,7 +4,6 @@ import com.raczy.chinesecheckers.Board;
 import com.raczy.chinesecheckers.Field;
 import com.raczy.chinesecheckers.builder.BoardBuilder;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

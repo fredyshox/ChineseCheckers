@@ -5,4 +5,6 @@ package com.raczy.chinesecheckers;
  */
 public interface GameSessionObserver {
     void onStateChange(GameSession session, GameSessionState state);
+    void onPlayerChange(GameSession session, Player current);
+    void onBoardUpdate(GameSession session, GameInfo update);
 }

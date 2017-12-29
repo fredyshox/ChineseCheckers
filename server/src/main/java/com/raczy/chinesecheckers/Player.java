@@ -1,7 +1,5 @@
 package com.raczy.chinesecheckers;
 
-import java.util.ArrayList;
-
 /**
  * Created by kacperraczy on 12.12.2017.
  */
