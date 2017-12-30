@@ -6,6 +6,7 @@ import com.raczy.chinesecheckers.exceptions.ForbiddenMoveException;
 import com.raczy.chinesecheckers.exceptions.GameException;
 import com.raczy.chinesecheckers.mode.GameMode;
 import com.raczy.chinesecheckers.mode.StandardGameMode;
+import com.raczy.chinesecheckers.util.GraphIDGenerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +19,10 @@ import java.util.Random;
  */
 public class GameSession {
     private static Logger log = LogManager.getLogger(GameSession.class);
+    private static GraphIDGenerator idGenerator = new GraphIDGenerator();
     private Random randomGenerator = new Random();
+
+    private int id;
     private ArrayList<Player> players;
     private int expectedPlayerCount;
     private BoardBuilder builder;
@@ -31,6 +35,7 @@ public class GameSession {
     private int queueCounter;
 
     public GameSession(int playerNo, BoardBuilder builder) {
+        this.id = idGenerator.generate();
         this.expectedPlayerCount = playerNo;
         this.builder = builder;
         setState(GameSessionState.WAITING);
@@ -42,6 +47,7 @@ public class GameSession {
     }
 
     public GameSession(BoardBuilder builder, ArrayList<Player> players) {
+        this.id = idGenerator.generate();
         this.players = players;
         this.builder = builder;
         this.expectedPlayerCount = players.size();
@@ -216,5 +222,9 @@ public class GameSession {
     private void setState(GameSessionState state) {
         this.state = state;
         notifyStateChanged();
+    }
+
+    public int getId() {
+        return id;
     }
 }
