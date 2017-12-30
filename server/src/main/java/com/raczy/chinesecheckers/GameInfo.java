@@ -1,13 +1,18 @@
 package com.raczy.chinesecheckers;
 
+import com.raczy.utility.JsonRequired;
+
 import java.util.Date;
 
 /**
  * Created by kacperraczy on 12.12.2017.
  */
 public class GameInfo {
+    @JsonRequired
     private Date createdAt;
+    @JsonRequired
     private int oldFieldID;
+    @JsonRequired
     private int newFieldID;
 
     public GameInfo(Date date, int oldf, int newf) {

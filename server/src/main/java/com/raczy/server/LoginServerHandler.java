@@ -3,6 +3,7 @@ package com.raczy.server;
 import com.google.gson.Gson;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.raczy.chinesecheckers.Player;
 import com.raczy.server.message.ErrorMessage;
@@ -23,7 +24,7 @@ import org.apache.logging.log4j.Logger;
 public class LoginServerHandler extends SimpleChannelInboundHandler<String>{
 
     private static Logger log = LogManager.getLogger(LoginServerHandler.class);
-    private Gson gson = new Gson();
+    private Gson gson = Utility.getGson();
     private LoginServerDelegate delegate;
 
     @Override
@@ -33,12 +34,9 @@ public class LoginServerHandler extends SimpleChannelInboundHandler<String>{
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String json) throws Exception {
-        log.info("Received");
         LoginMessage message = gson.fromJson(json, LoginMessage.class);
-        System.out.println(message.toJson());
-
         if (message != null) {
-            log.info("Received login message: " + message.getUsername());
+            log.info("Received login message: " + message.getUsername() + ", message: " + message.toJson());
 
             Channel ch = ctx.channel();
             String id = ctx.channel().id().asShortText();
@@ -51,7 +49,7 @@ public class LoginServerHandler extends SimpleChannelInboundHandler<String>{
                 next(ctx);
 
                 delegate.playerJoined(ctx, player);
-            }else {
+            } else {
                 log.error("Unable to join game with id: " + gameID);
                 ErrorMessage errorMessage = new ErrorMessage("Unable to join game with id: " + gameID);
                 ctx.writeAndFlush(errorMessage.toJson());

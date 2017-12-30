@@ -1,13 +1,15 @@
 package com.raczy.server;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonWriter;
-import com.raczy.chinesecheckers.Board;
-import com.raczy.chinesecheckers.Field;
-import com.raczy.chinesecheckers.GameSession;
-import com.raczy.chinesecheckers.Player;
+import com.raczy.chinesecheckers.*;
 import com.raczy.chinesecheckers.builder.BoardBuilder;
 import com.raczy.chinesecheckers.builder.StandardBoardBuilder;
+import com.raczy.server.message.GameInfoMessage;
+import com.raczy.server.message.LoginMessage;
+import com.raczy.server.message.Message;
+import com.raczy.utility.AnnotatedDeserializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,6 +24,7 @@ public class Utility {
 
     protected static Logger log = LogManager.getLogger(Utility.class);
 
+    //test client data generating program
     public static void main(String[] args) {
         BoardBuilder builder = new StandardBoardBuilder();
         builder.generateMainBoardPart();
@@ -52,6 +55,16 @@ public class Utility {
                 out.close();
             }catch (Exception e){}
         }
+    }
+
+    public static Gson getGson() {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(GameInfo.class, new AnnotatedDeserializer<GameInfo>());
+        builder.registerTypeAdapter(GameInfoMessage.class , new AnnotatedDeserializer<GameInfoMessage>());
+        builder.registerTypeAdapter(Message.class, new AnnotatedDeserializer<Message>());
+        builder.registerTypeAdapter(LoginMessage.class, new AnnotatedDeserializer<LoginMessage>());
+
+        return builder.create();
     }
 
     public static String sessionToJson(GameSession session) {

@@ -1,6 +1,7 @@
 package com.raczy.server;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.raczy.chinesecheckers.*;
 import com.raczy.chinesecheckers.builder.StandardBoardBuilder;
 import com.raczy.chinesecheckers.exceptions.GameException;
@@ -24,7 +25,9 @@ import java.util.Map;
 public class GameServerHandler extends SimpleChannelInboundHandler<String> implements GameSessionObserver, LoginServerDelegate {
 
     private static Logger log = LogManager.getLogger(GameServerHandler.class);
-    private Gson gson = new Gson();
+    private Gson gson = Utility.getGson();
+
+    //TODO multiple games
     private ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     //TODO game options
@@ -65,26 +68,29 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
         }
     }
 
+    ////////
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String s) throws Exception {
         if (game.getState() == GameSessionState.IN_PROGRESS) {
             GameInfo move = gson.fromJson(s, GameInfo.class);
+
             Player current = game.getCurrentPlayer();
             Player sender = ctx.channel().attr(GameServer.PLAYER_KEY).get();
 
             if (current.getId() == sender.getId()) {
                 if (move != null) {
                     handleMove(ctx, move, sender);
-                }else {
-                    log.error("Cannot gather data from JSON");
+                } else {
+                    log.error("Unable to parse GameInfo json");
                 }
-            }else {
+            } else {
                 log.error("Invalid player: " + sender.getId());
                 Message msg = new ErrorMessage("Invalid player: " + sender.getId());
                 ctx.write(msg.toJson());
+                ctx.flush();
             }
         }
-
     }
 
 //    @Override

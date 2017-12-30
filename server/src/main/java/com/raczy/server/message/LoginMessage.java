@@ -1,11 +1,16 @@
 package com.raczy.server.message;
 
+import com.raczy.utility.JsonRequired;
+
 /**
  * Created by kacperraczy on 29.12.2017.
  */
 public class LoginMessage extends Message {
 
+    @JsonRequired
     private String username;
+
+    @JsonRequired
     private int gameID;
 
     public LoginMessage(int gameID, String username) {

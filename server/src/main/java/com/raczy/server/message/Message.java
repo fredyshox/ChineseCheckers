@@ -1,20 +1,25 @@
 package com.raczy.server.message;
 
-import com.google.gson.Gson;
+import com.google.gson.*;
+import com.raczy.utility.JsonRequired;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
  * Created by kacperraczy on 22.12.2017.
  */
+
 public class Message {
 
-    private final String type;
     protected static Logger log = LogManager.getLogger(Message.class);
+
+    @JsonRequired
+    private final String type;
 
     public Message(String type) {
         this.type = type;
     }
+
 
     public String toJson() {
         Gson gson = new Gson();
@@ -25,3 +30,4 @@ public class Message {
         return type;
     }
 }
+
