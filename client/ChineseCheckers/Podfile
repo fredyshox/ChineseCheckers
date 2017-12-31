@@ -1,0 +1,24 @@
+project 'ChineseCheckers.xcodeproj'
+
+def shared_pods
+  pod 'XCGLogger'
+  pod 'CocoaAsyncSocket'
+end
+
+target 'ChineseCheckers iOS' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for ChineseCheckers iOS
+  shared_pods
+  
+end
+
+target 'ChineseCheckers macOS' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for ChineseCheckers macOS
+  shared_pods
+
+end

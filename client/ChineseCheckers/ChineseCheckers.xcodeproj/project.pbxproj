@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A78715F6093CA70298DA54E6 /* Pods_ChineseCheckers_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED4923E20120E69E210E54F9 /* Pods_ChineseCheckers_macOS.framework */; };
+		AA69780DFF83610FE78F8676 /* Pods_ChineseCheckers_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9CDFC41394BFCD1F0922F /* Pods_ChineseCheckers_iOS.framework */; };
 		E21FD86B1FF13D7F00B97766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21FD86A1FF13D7F00B97766 /* AppDelegate.swift */; };
 		E21FD86D1FF13D7F00B97766 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21FD86C1FF13D7F00B97766 /* GameViewController.swift */; };
 		E21FD8701FF13D7F00B97766 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E21FD86E1FF13D7F00B97766 /* Main.storyboard */; };
@@ -50,9 +52,27 @@
 		E2675CE01FF5D36900E49AE7 /* GameSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */; };
 		E2675CE31FF5DD4000E49AE7 /* FieldHexagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CE21FF5DD4000E49AE7 /* FieldHexagonNode.swift */; };
 		E2675CE41FF5DF4100E49AE7 /* FieldHexagonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CE21FF5DD4000E49AE7 /* FieldHexagonNode.swift */; };
+		E2F3AC201FF7266D00B44941 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC1F1FF7266D00B44941 /* GameService.swift */; };
+		E2F3AC211FF726B400B44941 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC1F1FF7266D00B44941 /* GameService.swift */; };
+		E2F3AC231FF7315C00B44941 /* TurnInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC221FF7315C00B44941 /* TurnInfo.swift */; };
+		E2F3AC251FF7320300B44941 /* ErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC241FF7320300B44941 /* ErrorInfo.swift */; };
+		E2F3AC261FF7326A00B44941 /* TurnInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC221FF7315C00B44941 /* TurnInfo.swift */; };
+		E2F3AC271FF7326D00B44941 /* ErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC241FF7320300B44941 /* ErrorInfo.swift */; };
+		E2F3AC291FF7338B00B44941 /* ResultInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC281FF7338B00B44941 /* ResultInfo.swift */; };
+		E2F3AC2B1FF734D600B44941 /* LoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC2A1FF734D600B44941 /* LoginInfo.swift */; };
+		E2F3AC2C1FF734D800B44941 /* LoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC2A1FF734D600B44941 /* LoginInfo.swift */; };
+		E2F3AC2D1FF734DC00B44941 /* ResultInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC281FF7338B00B44941 /* ResultInfo.swift */; };
+		E2F3AC2F1FF736A800B44941 /* GameServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC2E1FF736A800B44941 /* GameServiceDelegate.swift */; };
+		E2F3AC301FF736A800B44941 /* GameServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC2E1FF736A800B44941 /* GameServiceDelegate.swift */; };
+		E2F3AC341FF8556400B44941 /* GameSceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24026451FF474550069D0FA /* GameSceneState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11DBF6DEA9835530FFF07F6E /* Pods-ChineseCheckers iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseCheckers iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseCheckers iOS/Pods-ChineseCheckers iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		764B87C931519CC9B2E9567D /* Pods-ChineseCheckers iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseCheckers iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseCheckers iOS/Pods-ChineseCheckers iOS.release.xcconfig"; sourceTree = "<group>"; };
+		7723FBB429D1CE8FAE4B2CFB /* Pods-ChineseCheckers macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseCheckers macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseCheckers macOS/Pods-ChineseCheckers macOS.release.xcconfig"; sourceTree = "<group>"; };
+		C837BF2FD01580C29645DB94 /* Pods-ChineseCheckers macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseCheckers macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseCheckers macOS/Pods-ChineseCheckers macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		CCE9CDFC41394BFCD1F0922F /* Pods_ChineseCheckers_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChineseCheckers_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21FD85F1FF13D7F00B97766 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		E21FD8601FF13D7F00B97766 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		E21FD8611FF13D7F00B97766 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -84,6 +104,13 @@
 		E2675CDB1FF5C75300E49AE7 /* GameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfo.swift; sourceTree = "<group>"; };
 		E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSessionDelegate.swift; sourceTree = "<group>"; };
 		E2675CE21FF5DD4000E49AE7 /* FieldHexagonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldHexagonNode.swift; sourceTree = "<group>"; };
+		E2F3AC1F1FF7266D00B44941 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
+		E2F3AC221FF7315C00B44941 /* TurnInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnInfo.swift; sourceTree = "<group>"; };
+		E2F3AC241FF7320300B44941 /* ErrorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInfo.swift; sourceTree = "<group>"; };
+		E2F3AC281FF7338B00B44941 /* ResultInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultInfo.swift; sourceTree = "<group>"; };
+		E2F3AC2A1FF734D600B44941 /* LoginInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfo.swift; sourceTree = "<group>"; };
+		E2F3AC2E1FF736A800B44941 /* GameServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameServiceDelegate.swift; sourceTree = "<group>"; };
+		ED4923E20120E69E210E54F9 /* Pods_ChineseCheckers_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChineseCheckers_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA69780DFF83610FE78F8676 /* Pods_ChineseCheckers_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,12 +126,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A78715F6093CA70298DA54E6 /* Pods_ChineseCheckers_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A10B6EBF78DD687B94AC960 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				11DBF6DEA9835530FFF07F6E /* Pods-ChineseCheckers iOS.debug.xcconfig */,
+				764B87C931519CC9B2E9567D /* Pods-ChineseCheckers iOS.release.xcconfig */,
+				C837BF2FD01580C29645DB94 /* Pods-ChineseCheckers macOS.debug.xcconfig */,
+				7723FBB429D1CE8FAE4B2CFB /* Pods-ChineseCheckers macOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CE300AB7C0170F15FEE0D761 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CCE9CDFC41394BFCD1F0922F /* Pods_ChineseCheckers_iOS.framework */,
+				ED4923E20120E69E210E54F9 /* Pods_ChineseCheckers_macOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E21FD8591FF13D7F00B97766 = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +160,8 @@
 				E21FD8691FF13D7F00B97766 /* ChineseCheckers iOS */,
 				E21FD87A1FF13D7F00B97766 /* ChineseCheckers macOS */,
 				E21FD8681FF13D7F00B97766 /* Products */,
+				8A10B6EBF78DD687B94AC960 /* Pods */,
+				CE300AB7C0170F15FEE0D761 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				E252E4F51FF329B6008DCC3D /* grid.json */,
+				E2F3AC1E1FF7265600B44941 /* Services */,
 				E252E4E91FF2F17D008DCC3D /* Logic */,
 				E21FD85F1FF13D7F00B97766 /* Actions.sks */,
 				E21FD8601FF13D7F00B97766 /* GameScene.sks */,
@@ -143,6 +195,7 @@
 		E21FD8691FF13D7F00B97766 /* ChineseCheckers iOS */ = {
 			isa = PBXGroup;
 			children = (
+				E2F3AC311FF8532200B44941 /* Views */,
 				E24026311FF461420069D0FA /* Utility */,
 				E21FD86A1FF13D7F00B97766 /* AppDelegate.swift */,
 				E21FD86C1FF13D7F00B97766 /* GameViewController.swift */,
@@ -201,8 +254,28 @@
 				E252E4EA1FF2F906008DCC3D /* FieldInfo.swift */,
 				E252E4ED1FF2FCF2008DCC3D /* BoardInfo.swift */,
 				E2675CDB1FF5C75300E49AE7 /* GameInfo.swift */,
+				E2F3AC221FF7315C00B44941 /* TurnInfo.swift */,
+				E2F3AC241FF7320300B44941 /* ErrorInfo.swift */,
+				E2F3AC281FF7338B00B44941 /* ResultInfo.swift */,
+				E2F3AC2A1FF734D600B44941 /* LoginInfo.swift */,
 			);
 			path = Info;
+			sourceTree = "<group>";
+		};
+		E2F3AC1E1FF7265600B44941 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E2F3AC1F1FF7266D00B44941 /* GameService.swift */,
+				E2F3AC2E1FF736A800B44941 /* GameServiceDelegate.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E2F3AC311FF8532200B44941 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,9 +285,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E21FD88D1FF13D7F00B97766 /* Build configuration list for PBXNativeTarget "ChineseCheckers iOS" */;
 			buildPhases = (
+				313C236BA1340A2482603B2D /* [CP] Check Pods Manifest.lock */,
 				E21FD8631FF13D7F00B97766 /* Sources */,
 				E21FD8641FF13D7F00B97766 /* Frameworks */,
 				E21FD8651FF13D7F00B97766 /* Resources */,
+				9FED091E4092FA8DCC0C5C31 /* [CP] Embed Pods Frameworks */,
+				E91ABF3DD0E9A22AC3D67AA0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -229,9 +305,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E21FD8901FF13D7F00B97766 /* Build configuration list for PBXNativeTarget "ChineseCheckers macOS" */;
 			buildPhases = (
+				3A38CA17504B806417252B9C /* [CP] Check Pods Manifest.lock */,
 				E21FD8751FF13D7F00B97766 /* Sources */,
 				E21FD8761FF13D7F00B97766 /* Frameworks */,
 				E21FD8771FF13D7F00B97766 /* Resources */,
+				745EFC43BE9D0ADF23733B0C /* [CP] Embed Pods Frameworks */,
+				758E689C7CAC2D21271EAEC9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -309,6 +388,99 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		313C236BA1340A2482603B2D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3A38CA17504B806417252B9C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		745EFC43BE9D0ADF23733B0C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChineseCheckers macOS/Pods-ChineseCheckers macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		758E689C7CAC2D21271EAEC9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChineseCheckers macOS/Pods-ChineseCheckers macOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FED091E4092FA8DCC0C5C31 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChineseCheckers iOS/Pods-ChineseCheckers iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E91ABF3DD0E9A22AC3D67AA0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChineseCheckers iOS/Pods-ChineseCheckers iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E21FD8631FF13D7F00B97766 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -320,11 +492,18 @@
 				E21FD8941FF1CF7D00B97766 /* HexagonNode.swift in Sources */,
 				E252E4E71FF2F03F008DCC3D /* Board.swift in Sources */,
 				E2675CE31FF5DD4000E49AE7 /* FieldHexagonNode.swift in Sources */,
+				E2F3AC2B1FF734D600B44941 /* LoginInfo.swift in Sources */,
 				E21FD8871FF13D7F00B97766 /* GameScene.swift in Sources */,
+				E2F3AC341FF8556400B44941 /* GameSceneState.swift in Sources */,
+				E2F3AC201FF7266D00B44941 /* GameService.swift in Sources */,
 				E252E4EB1FF2F906008DCC3D /* FieldInfo.swift in Sources */,
 				E21FD86D1FF13D7F00B97766 /* GameViewController.swift in Sources */,
+				E2F3AC231FF7315C00B44941 /* TurnInfo.swift in Sources */,
 				E2675CDC1FF5C75300E49AE7 /* GameInfo.swift in Sources */,
+				E2F3AC251FF7320300B44941 /* ErrorInfo.swift in Sources */,
 				E24026491FF47A0F0069D0FA /* GameSession.swift in Sources */,
+				E2F3AC291FF7338B00B44941 /* ResultInfo.swift in Sources */,
+				E2F3AC2F1FF736A800B44941 /* GameServiceDelegate.swift in Sources */,
 				E24026441FF473B90069D0FA /* HexagonNodeDelegate.swift in Sources */,
 				E252E4EE1FF2FCF2008DCC3D /* BoardInfo.swift in Sources */,
 				E240262E1FF45D960069D0FA /* Player.swift in Sources */,
@@ -344,15 +523,21 @@
 				E21FD8881FF13D7F00B97766 /* GameScene.swift in Sources */,
 				E2675CE41FF5DF4100E49AE7 /* FieldHexagonNode.swift in Sources */,
 				E252E4EC1FF2F906008DCC3D /* FieldInfo.swift in Sources */,
+				E2F3AC211FF726B400B44941 /* GameService.swift in Sources */,
 				E21FD87E1FF13D7F00B97766 /* GameViewController.swift in Sources */,
 				E252E4EF1FF2FCF2008DCC3D /* BoardInfo.swift in Sources */,
+				E2F3AC261FF7326A00B44941 /* TurnInfo.swift in Sources */,
 				E2675CDD1FF5C94A00E49AE7 /* GameInfo.swift in Sources */,
+				E2F3AC271FF7326D00B44941 /* ErrorInfo.swift in Sources */,
 				E24026481FF477D60069D0FA /* GameSession.swift in Sources */,
 				E24026431FF471D00069D0FA /* HexagonNodeDelegate.swift in Sources */,
 				E24026461FF474550069D0FA /* GameSceneState.swift in Sources */,
+				E2F3AC301FF736A800B44941 /* GameServiceDelegate.swift in Sources */,
+				E2F3AC2D1FF734DC00B44941 /* ResultInfo.swift in Sources */,
 				E240262F1FF45E7C0069D0FA /* Player.swift in Sources */,
 				E24026411FF4621C0069D0FA /* AppKit+Extensions.swift in Sources */,
 				E21FD87C1FF13D7F00B97766 /* AppDelegate.swift in Sources */,
+				E2F3AC2C1FF734D800B44941 /* LoginInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,13 +673,14 @@
 		};
 		E21FD88E1FF13D7F00B97766 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11DBF6DEA9835530FFF07F6E /* Pods-ChineseCheckers iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JE2494MFB5;
 				INFOPLIST_FILE = "ChineseCheckers iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = raczy.ChineseCheckers;
 				PRODUCT_NAME = ChineseCheckers;
@@ -506,13 +692,14 @@
 		};
 		E21FD88F1FF13D7F00B97766 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 764B87C931519CC9B2E9567D /* Pods-ChineseCheckers iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JE2494MFB5;
 				INFOPLIST_FILE = "ChineseCheckers iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = raczy.ChineseCheckers;
 				PRODUCT_NAME = ChineseCheckers;
@@ -525,6 +712,7 @@
 		};
 		E21FD8911FF13D7F00B97766 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C837BF2FD01580C29645DB94 /* Pods-ChineseCheckers macOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
@@ -543,6 +731,7 @@
 		};
 		E21FD8921FF13D7F00B97766 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7723FBB429D1CE8FAE4B2CFB /* Pods-ChineseCheckers macOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
