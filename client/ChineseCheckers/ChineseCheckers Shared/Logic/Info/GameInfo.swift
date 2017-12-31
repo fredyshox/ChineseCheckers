@@ -8,10 +8,16 @@
 
 import Foundation
 
-class GameInfo {
+struct GameInfo: Codable {
     private let _createdAt: Date
     private let _oldFieldID: Int
     private let _newFieldID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case _createdAt = "createdAt"
+        case _oldFieldID = "oldFieldID"
+        case _newFieldID = "newFieldID"
+    }
     
     init(date: Date, from: Int, to: Int) {
         self._createdAt = date
@@ -19,7 +25,7 @@ class GameInfo {
         self._newFieldID = to
     }
     
-    convenience init? (dict: [String: Any]) {
+    init? (dict: [String: Any]) {
         guard let timestamp = dict["createdAt"] as? Int,
               let from = dict["oldFieldID"] as? Int,
               let to = dict["newFieldID"]as? Int

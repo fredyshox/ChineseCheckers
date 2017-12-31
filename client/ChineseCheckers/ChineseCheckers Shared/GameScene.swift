@@ -14,7 +14,7 @@ class GameScene: SKScene {
     fileprivate var label : SKLabelNode?
     fileprivate var spinnyNode : SKShapeNode?
     fileprivate var _session: GameSession!
-    fileprivate var _state: GameSceneState = OffState.shared
+    fileprivate var _state: GameSceneState = ListeningState.shared
     
     fileprivate static let hexSize: CGFloat = 40
     fileprivate static let hexOffset: CGFloat = 5

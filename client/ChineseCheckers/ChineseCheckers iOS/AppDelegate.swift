@@ -8,6 +8,25 @@
 
 import UIKit
 
+let log: XCGLogger = {
+    let log = XCGLogger(identifier: "iOSLogger", includeDefaultDestinations: false)
+    
+    let systemDestination = AppleSystemLogDestination(owner: log, identifier: "iOSLogger.systemDestination")
+    systemDestination.outputLevel = .debug
+    systemDestination.showDate = true
+    systemDestination.showLogIdentifier = false
+    systemDestination.showLineNumber = true
+    systemDestination.showFunctionName = true
+    systemDestination.showFileName = true
+    systemDestination.showLevel = true
+    
+    log.add(destination: systemDestination)
+    
+    log.logAppDetails()
+    
+    return log
+}()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,7 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        //init logger
+        let _ = log
+        
         return true
     }
 
