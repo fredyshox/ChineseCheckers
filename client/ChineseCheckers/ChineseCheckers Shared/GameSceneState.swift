@@ -103,7 +103,7 @@ class SelectedHexState: GameSceneState {
             let checkerFieldName = scene.findFieldHex(point: checker.position)?.name
             
             checker.run(moveAction, completion: {
-                let session = scene.session
+                let service = scene.service
                 if  let fieldName = hex.name,
                     let fieldIndex = scene.hexIndex(checkerName: fieldName),
                     let checkerFieldName = checkerFieldName,
@@ -111,7 +111,7 @@ class SelectedHexState: GameSceneState {
                     let info = GameInfo(date: Date(), from: checkerFieldIndex, to: fieldIndex)
                     
                     //should send to server
-                    session.performMove(info: info)
+                    service.sendMove(gameInfo: info)
                 }
             })
         }

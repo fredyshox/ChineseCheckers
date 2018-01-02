@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Player {
+class Player: Equatable {
     private let _id: Int
     private let _username: String
     private let _zoneID: Int
@@ -38,5 +38,9 @@ class Player {
     
     var zoneID: Int {
         return _zoneID
+    }
+    
+    public static func == (lhs: Player, rhs: Player) -> Bool {
+        return lhs.id == rhs.id && lhs.username == rhs.username && lhs.zoneID == rhs.zoneID
     }
 }

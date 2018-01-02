@@ -12,6 +12,7 @@ import CocoaAsyncSocket
 class GameService: NSObject{
     
     //props
+    fileprivate static let serviceData: [String:Any] = readPlist()
     fileprivate var _session: GameSession!
     fileprivate var _socket: GCDAsyncSocket!
     
@@ -32,13 +33,44 @@ class GameService: NSObject{
         
         let queue = DispatchQueue.main
         let socket = GCDAsyncSocket(delegate: self, delegateQueue: queue)
+    
         self._socket = socket
         
         setUpCoders()
     }
     
+    private func connect() {
+        guard let port = GameService.serviceData["port"] as? UInt16, let url = GameService.serviceData["url"] as? String
+        else {
+            log.error("Property list doesn't contain required values")
+            return
+        }
+        
+        do {
+            try self._socket.connect(toHost: url, onPort: port, withTimeout: 5.0)
+        } catch {
+            log.error(error.localizedDescription)
+        }
+    }
+    
     private func setUpCoders() {
         encoder.dateEncodingStrategy = .millisecondsSince1970
+    }
+    
+    fileprivate static func readPlist() -> [String:Any] {
+        let plistPath = Bundle.main.path(forResource: "service", ofType: "plist")!
+        let plistXML = FileManager.default.contents(atPath: plistPath)!
+        var plistFormat = PropertyListSerialization.PropertyListFormat.xml
+        var plistData = [String:Any]()
+        
+        do {
+            
+            plistData = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &plistFormat) as! [String:Any]
+        }catch {
+            log.error(error.localizedDescription)
+        }
+        
+        return plistData
     }
     
     //MARK: Getters/Setters
@@ -115,6 +147,7 @@ extension GameService: GCDAsyncSocketDelegate {
                 }
                 
                 self._session = GameSession(binfo: boardInfo, players: players)
+                self._delegate?.service(self, gameDidStarted: self._session)
             }
         case "info":
             if let infoJson = json["info"] as? [String:Any], let gameInfo = GameInfo(dict: infoJson) {

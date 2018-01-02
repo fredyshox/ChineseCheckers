@@ -13,8 +13,10 @@ class GameScene: SKScene {
     
     fileprivate var label : SKLabelNode?
     fileprivate var spinnyNode : SKShapeNode?
-    fileprivate var _session: GameSession!
+    fileprivate var _service: GameService!
     fileprivate var _state: GameSceneState = ListeningState.shared
+    
+    fileprivate var playerNodes: [HexagonNode] = []
     
     fileprivate static let hexSize: CGFloat = 40
     fileprivate static let hexOffset: CGFloat = 5
@@ -23,7 +25,7 @@ class GameScene: SKScene {
     
 
     public var board: Board {
-        return self._session.board
+        return session.board
     }
     
     public var state: GameSceneState {
@@ -36,40 +38,52 @@ class GameScene: SKScene {
     }
     
     public var session: GameSession {
-        return _session
+        return _service.session
+    }
+    
+    public var service: GameService {
+        get{
+            return _service
+        }
+        set{
+            _service = newValue
+        }
     }
     
     //temporary (until game logic is done)
     fileprivate var player: Player {
-        return self._session.players.first!
+        return session.players.first!
     }
     
-    class func newGameScene() -> GameScene {
+    class func newGameScene(service: GameService) -> GameScene {
         // Load 'GameScene.sks' as an SKScene.
         guard let scene = SKScene(fileNamed: "GameScene") as? GameScene else {
             print("Failed to load GameScene.sks")
             abort()
         }
+        
+        scene._service = service
+        
 
-        if let path = Bundle.main.path(forResource: "grid", ofType: "json") {
-            let url = URL(fileURLWithPath: path)
-            let data = try! Data(contentsOf: url)
-            let json = try! JSONSerialization.jsonObject(with: data)
-            if let item = json as? [String: Any] {
-                var players = [Player]()
-                if let playersJson = item["players"] as? [[String: Any]] {
-                    for dict in playersJson {
-                        if let player = Player(dict: dict){
-                            players.append(player)
-                        }
-                    }
-                    
-                    if let boardInfo = BoardInfo(dict: item) {
-                        scene._session = GameSession(binfo: boardInfo, players: players)
-                    }
-                }
-            }
-        }
+//        if let path = Bundle.main.path(forResource: "grid", ofType: "json") {
+//            let url = URL(fileURLWithPath: path)
+//            let data = try! Data(contentsOf: url)
+//            let json = try! JSONSerialization.jsonObject(with: data)
+//            if let item = json as? [String: Any] {
+//                var players = [Player]()
+//                if let playersJson = item["players"] as? [[String: Any]] {
+//                    for dict in playersJson {
+//                        if let player = Player(dict: dict){
+//                            players.append(player)
+//                        }
+//                    }
+//
+//                    if let boardInfo = BoardInfo(dict: item) {
+//                        scene._session = GameSession(binfo: boardInfo, players: players)
+//                    }
+//                }
+//            }
+//        }
         
         // Set the scale mode to scale to fit the window
         scene.scaleMode = .aspectFill
@@ -92,6 +106,8 @@ class GameScene: SKScene {
         let node = createFieldHex(id: hexName(id: startId))
         node.position = center
         self.addChild(node)
+        
+        self.playerNodes = []
         
         createNeighbours(arr: [startField])
         createCheckers(fields: self.board.fields.map({$0.value}))
@@ -163,9 +179,10 @@ class GameScene: SKScene {
         node.name = checkerName(player: player)
         node.fillColor = checkerColor(zone: player.zoneID)
         
-        //only current player's checkers
-        node.delegate = self
-        
+        if self.player == player {
+            self.playerNodes.append(node)
+        }
+
         return node
     }
     
@@ -173,10 +190,6 @@ class GameScene: SKScene {
         let node = HexagonNode(size: GameScene.hexSize)
         node.name = id
         node.fillColor = GameScene.fieldColor
-//        
-//        if let index = hexIndex(checkerName: id) {
-//            node.index = index
-//        }
         return node
     }
     
@@ -287,7 +300,15 @@ extension GameScene: HexagonNodeDelegate {
 
 extension GameScene: GameSessionDelegate {
     func turnChanges(session: GameSession, player: Player) {
-        
+        if player == self.player {
+            for node in playerNodes {
+                node.delegate = self
+            }
+        }else {
+            for node in playerNodes {
+                node.delegate = nil
+            }
+        }
     }
     
     func boardChanged(session: GameSession, info: GameInfo) {
