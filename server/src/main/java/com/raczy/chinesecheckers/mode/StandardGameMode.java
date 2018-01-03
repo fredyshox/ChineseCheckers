@@ -94,12 +94,14 @@ public class StandardGameMode implements GameMode {
     private boolean validateMovePath(int fromId, int toId) {
         Field from = this.board.getFieldMap().get(fromId);
         Map<Integer, Field> possible = new HashMap<>();
+        Field field;
 
-        Arrays.asList(from.getNeighbours()).forEach(field -> {
+        for(int i = 0; i<from.getNeighbours().length; i++) {
+            field = from.getNeighbours()[i];
             if (field != null) {
-                possible.put(field.getId(), field);
+                possible.put(i, field);
             }
-        });
+        }
 
         for(Map.Entry<Integer, Field> entry: possible.entrySet()) {
             if(validateMove(entry.getValue(), toId, entry.getKey(), false)) {
