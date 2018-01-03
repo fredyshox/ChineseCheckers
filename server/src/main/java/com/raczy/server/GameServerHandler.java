@@ -1,7 +1,6 @@
 package com.raczy.server;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
 import com.raczy.chinesecheckers.*;
 import com.raczy.chinesecheckers.builder.StandardBoardBuilder;
 import com.raczy.chinesecheckers.exceptions.GameException;
@@ -9,7 +8,6 @@ import com.raczy.server.message.*;
 import io.netty.channel.*;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.ChannelGroupFuture;
-import io.netty.channel.group.ChannelGroupFutureListener;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +20,8 @@ import java.util.Map;
 /**
  * Created by kacperraczy on 21.12.2017.
  */
+
+@ChannelHandler.Sharable
 public class GameServerHandler extends SimpleChannelInboundHandler<String> implements GameSessionObserver, LoginServerDelegate {
 
     private static Logger log = LogManager.getLogger(GameServerHandler.class);
@@ -57,14 +57,18 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
             Channel ch = ctx.channel();
             channelGroup.add(ch);
 
-            addPlayer(player);
-
-            Map<String, String> json = new HashMap<>();
-            json.put("Username", player.getUsername());
-            json.put("Id", Integer.toString(player.getId()));
+            Map<String, Object> json = new HashMap<>();
+            json.put("id", player.getId());
+            json.put("username", player.getUsername());
+            json.put("type", "player");
             String json_str = gson.toJson(json);
             log.info(json_str);
-            ctx.writeAndFlush(json_str);
+            ChannelFuture future = ctx.writeAndFlush(json_str);
+
+            future.addListener((chFuture) -> {
+                log.info("Data sent");
+                addPlayer(player);
+            });
         }
     }
 
@@ -73,8 +77,8 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String s) throws Exception {
         if (game.getState() == GameSessionState.IN_PROGRESS) {
+            log.info("Received move: " + s);
             GameInfo move = gson.fromJson(s, GameInfo.class);
-
             Player current = game.getCurrentPlayer();
             Player sender = ctx.channel().attr(GameServer.PLAYER_KEY).get();
 
@@ -92,11 +96,6 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
             }
         }
     }
-
-//    @Override
-//    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-//        ctx.flush();
-//    }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
@@ -136,6 +135,7 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
     }
 
     private void sendInitialMessage(GameSession session) {
+        log.info("Game starts");
         InitialMessage initMessage = new InitialMessage(session);
         ChannelGroupFuture future = channelGroup.writeAndFlush(initMessage.toJson());
 
@@ -143,11 +143,14 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
             assert channelFutures == future;
 
             Player current = session.getCurrentPlayer();
+            log.info("Turn for player with id: " + current.getId());
             Message turnMessage = new TurnMessage(current.getId());
             channelGroup.writeAndFlush(turnMessage.toJson());
         });
 
     }
+
+
     private void addPlayer(Player player) {
         this.game.addPlayer(player);
     }

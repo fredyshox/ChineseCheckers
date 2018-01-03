@@ -30,7 +30,8 @@ public class InitialMessage extends Message {
             writer.name("type").value(getType());
 
             String sessionInfo = Utility.sessionToJson(this.session);
-            writer.name("session").value(sessionInfo);
+            writer.name("session");
+            writer.jsonValue(sessionInfo);
 
             writer.endObject();
             writer.close();

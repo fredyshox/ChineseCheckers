@@ -1,6 +1,7 @@
 package com.raczy.server.message;
 
 import com.google.gson.*;
+import com.raczy.server.Utility;
 import com.raczy.utility.JsonRequired;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +23,7 @@ public class Message {
 
 
     public String toJson() {
-        Gson gson = new Gson();
+        Gson gson = Utility.getGson();
         return gson.toJson(this);
     }
 

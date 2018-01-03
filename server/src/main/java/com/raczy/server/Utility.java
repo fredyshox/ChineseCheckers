@@ -10,11 +10,13 @@ import com.raczy.server.message.GameInfoMessage;
 import com.raczy.server.message.LoginMessage;
 import com.raczy.server.message.Message;
 import com.raczy.utility.AnnotatedDeserializer;
+import com.raczy.utility.Iso8601DateTypeAdapter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -57,12 +59,16 @@ public class Utility {
         }
     }
 
+
+
     public static Gson getGson() {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(GameInfo.class, new AnnotatedDeserializer<GameInfo>());
         builder.registerTypeAdapter(GameInfoMessage.class , new AnnotatedDeserializer<GameInfoMessage>());
         builder.registerTypeAdapter(Message.class, new AnnotatedDeserializer<Message>());
         builder.registerTypeAdapter(LoginMessage.class, new AnnotatedDeserializer<LoginMessage>());
+        //builder.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        builder.registerTypeAdapter(Date.class, new Iso8601DateTypeAdapter());
 
         return builder.create();
     }
