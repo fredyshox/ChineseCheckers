@@ -67,7 +67,10 @@ class HexagonNode: SKShapeNode {
 
 #if os(iOS)
 extension HexagonNode {
-    //recognize signle tap
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self._delegate?.hexNodeClicked(self)
+        log.info("Touched: \(self.name)")
+    }
 }
 #endif
 
@@ -75,7 +78,7 @@ extension HexagonNode {
 extension HexagonNode {
     override func mouseDown(with event: NSEvent) {
         self._delegate?.hexNodeClicked(self)
-        print("Clicked: \(self.name!)")
+        log.info("Clicked: \(self.name!)")
     }
 }
 #endif

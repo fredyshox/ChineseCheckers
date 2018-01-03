@@ -11,6 +11,7 @@ target 'ChineseCheckers iOS' do
 
   # Pods for ChineseCheckers iOS
   shared_pods
+  pod 'MBProgressHUD', '~> 1.0.0'
   
 end
 

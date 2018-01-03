@@ -23,7 +23,64 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="456.80000000000001" y="118.29085457271366"/>
+            <point key="canvasLocation" x="1458" y="117"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="daq-fx-FtN">
+            <objects>
+                <viewController id="ip5-ny-uco" customClass="LoginViewController" customModule="ChineseCheckers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t3J-Tn-npO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Boq-vw-UGp">
+                                <rect key="frame" x="16" y="335.5" width="343" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type in your username:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1Z-Gr-xwe">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.39607843139999999" green="0.39607843139999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syt-qE-eMO">
+                                        <rect key="frame" x="0.0" y="38" width="343" height="22"/>
+                                        <color key="textColor" red="0.39607843139999999" green="0.39607843139999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JQc-qD-gBc">
+                                <rect key="frame" x="166" y="411.5" width="43" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Log in">
+                                    <color key="titleColor" red="0.0" green="0.34509803919999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logIn:" destination="ip5-ny-uco" eventType="touchUpInside" id="5yd-6K-gTt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="a4o-xn-H3l" firstAttribute="trailing" secondItem="Boq-vw-UGp" secondAttribute="trailing" constant="16" id="0P6-hI-erR"/>
+                            <constraint firstItem="JQc-qD-gBc" firstAttribute="centerX" secondItem="a4o-xn-H3l" secondAttribute="centerX" id="C0Z-sW-uM7"/>
+                            <constraint firstItem="Boq-vw-UGp" firstAttribute="centerY" secondItem="a4o-xn-H3l" secondAttribute="centerY" id="Dbb-wV-hic"/>
+                            <constraint firstItem="Boq-vw-UGp" firstAttribute="leading" secondItem="a4o-xn-H3l" secondAttribute="leading" constant="16" id="hWy-o0-9n8"/>
+                            <constraint firstItem="JQc-qD-gBc" firstAttribute="top" secondItem="Boq-vw-UGp" secondAttribute="bottom" constant="16" id="vn1-RY-f9g"/>
+                            <constraint firstItem="Boq-vw-UGp" firstAttribute="centerX" secondItem="a4o-xn-H3l" secondAttribute="centerX" id="yvT-0h-R6A"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="a4o-xn-H3l"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0kX-Sw-11I"/>
+                    <connections>
+                        <outlet property="usernameTextField" destination="syt-qE-eMO" id="7tu-gU-B7U"/>
+                        <segue destination="BV1-FR-VrT" kind="presentation" identifier="showGameVC" id="hzf-gO-Fyz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tDu-uq-rWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="526" y="116"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ggH-2l-6fK">
@@ -36,7 +93,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BV1-FR-VrT" kind="relationship" relationship="rootViewController" id="ZOE-fk-N8S"/>
+                        <segue destination="ip5-ny-uco" kind="relationship" relationship="rootViewController" id="TrI-nU-8Ao"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dy-ou-fYE" userLabel="First Responder" sceneMemberID="firstResponder"/>

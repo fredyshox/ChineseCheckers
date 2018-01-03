@@ -11,11 +11,12 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    var service: GameService!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let scene = GameScene.newGameScene()
+        let scene = GameScene.newScene(service: service)
 
         // Present the scene
         let skView = self.view as! SKView

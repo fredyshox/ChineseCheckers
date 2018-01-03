@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XCGLogger
 
 let log: XCGLogger = {
     let log = XCGLogger(identifier: "iOSLogger", includeDefaultDestinations: false)

@@ -57,6 +57,8 @@
 		E286D85D1FFB1A800002956A /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286D85C1FFB1A800002956A /* MenuScene.swift */; };
 		E286D85E1FFB1A800002956A /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286D85C1FFB1A800002956A /* MenuScene.swift */; };
 		E286D85F1FFB1A850002956A /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E286D85A1FFB1A560002956A /* MenuScene.sks */; };
+		E2EA71FC1FFBF67200E0CDC9 /* service.plist in Resources */ = {isa = PBXBuildFile; fileRef = E286D8561FFAFF0A0002956A /* service.plist */; };
+		E2EA71FE1FFC060100E0CDC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA71FD1FFC060100E0CDC9 /* LoginViewController.swift */; };
 		E2F3AC201FF7266D00B44941 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC1F1FF7266D00B44941 /* GameService.swift */; };
 		E2F3AC211FF726B400B44941 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC1F1FF7266D00B44941 /* GameService.swift */; };
 		E2F3AC231FF7315C00B44941 /* TurnInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC221FF7315C00B44941 /* TurnInfo.swift */; };
@@ -112,6 +114,8 @@
 		E286D8561FFAFF0A0002956A /* service.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = service.plist; sourceTree = "<group>"; };
 		E286D85A1FFB1A560002956A /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		E286D85C1FFB1A800002956A /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		E2EA71FD1FFC060100E0CDC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E2EA71FF1FFC0D0B00E0CDC9 /* MBProgressHUD-bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-bridge.h"; sourceTree = "<group>"; };
 		E2F3AC1F1FF7266D00B44941 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
 		E2F3AC221FF7315C00B44941 /* TurnInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnInfo.swift; sourceTree = "<group>"; };
 		E2F3AC241FF7320300B44941 /* ErrorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInfo.swift; sourceTree = "<group>"; };
@@ -179,16 +183,13 @@
 				E252E4F51FF329B6008DCC3D /* grid.json */,
 				E2F3AC1E1FF7265600B44941 /* Services */,
 				E252E4E91FF2F17D008DCC3D /* Logic */,
+				E2EA71FB1FFBEA4A00E0CDC9 /* Scenes */,
 				E21FD85F1FF13D7F00B97766 /* Actions.sks */,
-				E21FD8601FF13D7F00B97766 /* GameScene.sks */,
-				E21FD8611FF13D7F00B97766 /* GameScene.swift */,
 				E21FD8621FF13D7F00B97766 /* Assets.xcassets */,
 				E21FD8931FF1CF7D00B97766 /* HexagonNode.swift */,
 				E2675CE21FF5DD4000E49AE7 /* FieldHexagonNode.swift */,
 				E24026421FF471D00069D0FA /* HexagonNodeDelegate.swift */,
 				E24026451FF474550069D0FA /* GameSceneState.swift */,
-				E286D85A1FFB1A560002956A /* MenuScene.sks */,
-				E286D85C1FFB1A800002956A /* MenuScene.swift */,
 			);
 			path = "ChineseCheckers Shared";
 			sourceTree = "<group>";
@@ -209,9 +210,11 @@
 				E24026311FF461420069D0FA /* Utility */,
 				E21FD86A1FF13D7F00B97766 /* AppDelegate.swift */,
 				E21FD86C1FF13D7F00B97766 /* GameViewController.swift */,
+				E2EA71FD1FFC060100E0CDC9 /* LoginViewController.swift */,
 				E21FD86E1FF13D7F00B97766 /* Main.storyboard */,
 				E21FD8711FF13D7F00B97766 /* LaunchScreen.storyboard */,
 				E21FD8741FF13D7F00B97766 /* Info.plist */,
+				E2EA71FF1FFC0D0B00E0CDC9 /* MBProgressHUD-bridge.h */,
 			);
 			path = "ChineseCheckers iOS";
 			sourceTree = "<group>";
@@ -270,6 +273,17 @@
 				E2F3AC2A1FF734D600B44941 /* LoginInfo.swift */,
 			);
 			path = Info;
+			sourceTree = "<group>";
+		};
+		E2EA71FB1FFBEA4A00E0CDC9 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				E286D85A1FFB1A560002956A /* MenuScene.sks */,
+				E286D85C1FFB1A800002956A /* MenuScene.swift */,
+				E21FD8601FF13D7F00B97766 /* GameScene.sks */,
+				E21FD8611FF13D7F00B97766 /* GameScene.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		E2F3AC1E1FF7265600B44941 /* Services */ = {
@@ -393,6 +407,7 @@
 			files = (
 				E21FD8811FF13D7F00B97766 /* Main.storyboard in Resources */,
 				E286D85B1FFB1A560002956A /* MenuScene.sks in Resources */,
+				E2EA71FC1FFBF67200E0CDC9 /* service.plist in Resources */,
 				E21FD8861FF13D7F00B97766 /* GameScene.sks in Resources */,
 				E21FD88A1FF13D7F00B97766 /* Assets.xcassets in Resources */,
 				E252E4F71FF329B6008DCC3D /* grid.json in Resources */,
@@ -513,6 +528,7 @@
 				E252E4EB1FF2F906008DCC3D /* FieldInfo.swift in Sources */,
 				E21FD86D1FF13D7F00B97766 /* GameViewController.swift in Sources */,
 				E2F3AC231FF7315C00B44941 /* TurnInfo.swift in Sources */,
+				E2EA71FE1FFC060100E0CDC9 /* LoginViewController.swift in Sources */,
 				E2675CDC1FF5C75300E49AE7 /* GameInfo.swift in Sources */,
 				E2F3AC251FF7320300B44941 /* ErrorInfo.swift in Sources */,
 				E24026491FF47A0F0069D0FA /* GameSession.swift in Sources */,
@@ -634,9 +650,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -682,7 +700,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
@@ -696,11 +716,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JE2494MFB5;
 				INFOPLIST_FILE = "ChineseCheckers iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = raczy.ChineseCheckers;
 				PRODUCT_NAME = ChineseCheckers;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -715,11 +736,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JE2494MFB5;
 				INFOPLIST_FILE = "ChineseCheckers iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = raczy.ChineseCheckers;
 				PRODUCT_NAME = ChineseCheckers;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

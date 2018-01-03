@@ -15,6 +15,7 @@ class GameScene: SKScene {
     fileprivate var spinnyNode : SKShapeNode?
     fileprivate var _service: GameService!
     fileprivate var _state: GameSceneState = ListeningState.shared
+    fileprivate var player: Player!
     
     fileprivate var playerNodes: [HexagonNode] = []
     
@@ -50,12 +51,7 @@ class GameScene: SKScene {
         }
     }
     
-    //temporary (until game logic is done)
-    fileprivate var player: Player {
-        return session.players.first!
-    }
-    
-    class func newGameScene(service: GameService) -> GameScene {
+    class func newScene(service: GameService) -> GameScene {
         // Load 'GameScene.sks' as an SKScene.
         guard let scene = SKScene(fileNamed: "GameScene") as? GameScene else {
             print("Failed to load GameScene.sks")
@@ -63,27 +59,10 @@ class GameScene: SKScene {
         }
         
         scene._service = service
-        
-
-//        if let path = Bundle.main.path(forResource: "grid", ofType: "json") {
-//            let url = URL(fileURLWithPath: path)
-//            let data = try! Data(contentsOf: url)
-//            let json = try! JSONSerialization.jsonObject(with: data)
-//            if let item = json as? [String: Any] {
-//                var players = [Player]()
-//                if let playersJson = item["players"] as? [[String: Any]] {
-//                    for dict in playersJson {
-//                        if let player = Player(dict: dict){
-//                            players.append(player)
-//                        }
-//                    }
-//
-//                    if let boardInfo = BoardInfo(dict: item) {
-//                        scene._session = GameSession(binfo: boardInfo, players: players)
-//                    }
-//                }
-//            }
-//        }
+    
+        let id = service.playerID!
+        scene.player = service.session.findPlayer(id: id)!
+        service.session.delegate = scene
         
         // Set the scale mode to scale to fit the window
         scene.scaleMode = .aspectFill

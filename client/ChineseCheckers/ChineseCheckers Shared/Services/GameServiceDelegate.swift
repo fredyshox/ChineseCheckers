@@ -14,3 +14,9 @@ protocol GameServiceDelegate {
     func service(_ service: GameService, didReceiveResult result: ResultInfo)
     func service(_ service: GameService, gameDidStarted session: GameSession)
 }
+
+extension GameServiceDelegate {
+    func service(_ service: GameService, didReceiveError error: ErrorInfo) {}
+    func service(_ service: GameService, didReceiveResult result: ResultInfo) {}
+    func service(_ service: GameService, gameDidStarted session: GameSession) {}
+}
