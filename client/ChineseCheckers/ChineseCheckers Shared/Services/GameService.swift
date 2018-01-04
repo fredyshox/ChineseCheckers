@@ -56,7 +56,7 @@ class GameService: NSObject{
         setUpCoders()
     }
     
-    func connect() {
+    public func connect() {
         guard let port = GameService.serviceData["port"] as? UInt16, let url = GameService.serviceData["url"] as? String
         else {
             log.error("Property list doesn't contain required values")
@@ -68,6 +68,10 @@ class GameService: NSObject{
         } catch {
             log.error(error.localizedDescription)
         }
+    }
+    
+    public func disconnect() {
+        self._socket.disconnect()
     }
     
     private func setUpCoders() {
@@ -164,6 +168,10 @@ extension GameService: GCDAsyncSocketDelegate {
     
     func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
         
+    }
+    
+    func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
+        log.info("Disconnected from server.");
     }
     
     func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {

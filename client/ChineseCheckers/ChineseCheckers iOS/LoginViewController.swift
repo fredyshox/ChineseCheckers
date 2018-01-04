@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
         if let text = usernameTextField.text {
             if text.count != 0 {
                 self.service.login(username: text, gameID: 0)
-                var hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             }
         }
     }

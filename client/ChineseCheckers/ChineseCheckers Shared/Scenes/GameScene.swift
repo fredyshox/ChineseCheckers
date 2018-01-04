@@ -10,14 +10,16 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    
-    fileprivate var label : SKLabelNode?
-    fileprivate var spinnyNode : SKShapeNode?
     fileprivate var _service: GameService!
     fileprivate var _state: GameSceneState = ListeningState.shared
-    fileprivate var player: Player!
+    fileprivate var _player: Player!
     
     fileprivate var playerNodes: [HexagonNode] = []
+    
+    fileprivate var minHexX: CGFloat = 0.0
+    fileprivate var maxHexX: CGFloat = 0.0
+    fileprivate var minHexY: CGFloat = 0.0
+    fileprivate var maxHexY: CGFloat = 0.0
     
     fileprivate static let hexSize: CGFloat = 40
     fileprivate static let hexOffset: CGFloat = 5
@@ -51,6 +53,10 @@ class GameScene: SKScene {
         }
     }
     
+    public var player: Player {
+        return _player
+    }
+    
     class func newScene(service: GameService) -> GameScene {
         // Load 'GameScene.sks' as an SKScene.
         guard let scene = SKScene(fileNamed: "GameScene") as? GameScene else {
@@ -61,7 +67,7 @@ class GameScene: SKScene {
         scene._service = service
     
         let id = service.playerID!
-        scene.player = service.session.findPlayer(id: id)!
+        scene._player = service.session.findPlayer(id: id)!
         service.session.delegate = scene
         
         // Set the scale mode to scale to fit the window
@@ -119,7 +125,11 @@ class GameScene: SKScene {
                 tempName = self.hexName(id: neighbour.id)
                 if self.childNode(withName: tempName) == nil {
                     let newNode = createFieldHex(id: tempName)
-                    newNode.position = offsetPosition(hex: hexNode, dir: direction)
+                    let position = offsetPosition(hex: hexNode, dir: direction)
+                    newNode.position = position
+                    
+                    updateCameraBoundaries(point: position)
+                    
                     self.addChild(newNode)
                     
                     createdFields.append(neighbour)
@@ -128,6 +138,20 @@ class GameScene: SKScene {
         }
         
         return createdFields
+    }
+    
+    func updateCameraBoundaries(point: CGPoint) {
+        if point.x > maxHexX {
+            maxHexX = point.x
+        }else if point.x < minHexX {
+            minHexX = point.x
+        }
+        
+        if point.y > maxHexY {
+            maxHexY = point.y
+        }else if point.y < minHexY {
+            minHexY = point.y
+        }
     }
     
     func offsetPosition(hex: HexagonNode, dir: Field.Direction) -> CGPoint {
@@ -225,6 +249,49 @@ class GameScene: SKScene {
         return result
     }
     
+    //MARK: Camera
+    
+    func setUpCamera() {
+        let cameraNode = SKCameraNode()
+        cameraNode.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        
+        self.addChild(cameraNode)
+        self.camera = cameraNode
+    }
+    
+    @objc
+    func handlePanGesture(recognizer: UIPanGestureRecognizer) {
+        if recognizer.state == .changed {
+            var translation = recognizer.translation(in: recognizer.view!)
+            translation = CGPoint(x: -translation.x, y: translation.y)
+            
+            self.moveCameraWith(translation: translation)
+            recognizer.setTranslation(CGPoint.zero, in: recognizer.view)
+        }
+    }
+    
+    func moveCameraWith(translation: CGPoint) {
+        let currentPostition = self.camera!.position
+        
+        
+        var newPosition = CGPoint(x: currentPostition.x + translation.x,
+                                       y: currentPostition.y + translation.y)
+    
+        if newPosition.x > maxHexX {
+            newPosition.x = maxHexX
+        }else if newPosition.x < minHexX {
+            newPosition.x = minHexX
+        }
+        
+        if newPosition.y > maxHexY {
+            newPosition.y = maxHexY
+        }else if newPosition.y < minHexY {
+            newPosition.y = minHexY
+        }
+        
+        self.camera?.position = newPosition
+    }
+    
     //MARK: Colors & Graphics
     
     #if os(iOS)
@@ -257,6 +324,10 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         self.setUpScene()
+        self.setUpCamera()
+        
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(recognizer:)))
+        self.view?.addGestureRecognizer(panGestureRecognizer)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -303,29 +374,6 @@ extension GameScene: GameSessionDelegate {
     }
 }
 
-#if os(iOS) || os(tvOS)
-// Touch-based event handling
-extension GameScene {
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-    
-   
-}
-#endif
 
 #if os(OSX)
 // Mouse-based event handling
