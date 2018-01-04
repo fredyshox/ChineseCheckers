@@ -46,7 +46,7 @@ public class LoginServerHandler extends SimpleChannelInboundHandler<String>{
                 ch.attr(GameServer.GAME_ID).set(gameID);
                 next(ctx);
 
-                delegate.playerJoined(ctx, player);
+                delegate.playerJoined(ctx, player, gameID);
             } else {
                 log.error("Unable to join game with id: " + gameID);
                 ErrorMessage errorMessage = new ErrorMessage("Unable to join game with id: " + gameID);

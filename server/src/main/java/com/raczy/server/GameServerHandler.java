@@ -27,18 +27,17 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
     private static Logger log = LogManager.getLogger(GameServerHandler.class);
     private Gson gson = Utility.getGson();
 
-    //TODO multiple games
-    private ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
-
-    //TODO game options
-    private GameSession game;
-    private int expectedPlayerNo = 2;
+    //Games
+    private Map<Integer, GameSession> games;
+    private Map<Integer, ChannelGroup> channelGroups;
 
     public GameServerHandler() {
         super();
 
-        this.game = new GameSession(expectedPlayerNo, new StandardBoardBuilder());
-        this.game.addObserver(this);
+        this.games = new HashMap<>();
+        this.channelGroups = new HashMap<>();
+
+        createGame();
     }
 
     //MARK: LoginServerDelegate
@@ -46,12 +45,17 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
 
     @Override
     public boolean playerCanJoin(ChannelHandlerContext ctx, Player player, int gameID) {
-        return this.game.getState() == GameSessionState.WAITING;
+        GameSession game = games.get(gameID);
+        return game.getState() == GameSessionState.WAITING;
     }
 
     @Override
-    public void playerJoined(ChannelHandlerContext ctx, Player player) {
+    public void playerJoined(ChannelHandlerContext ctx, Player player, int gameID) {
         log.info("Player joining with channel id: " + ctx.channel().id());
+
+        GameSession game = games.get(gameID);
+        ChannelGroup channelGroup = channelGroups.get(gameID);
+        //null safety
 
         if (game.getState() == GameSessionState.WAITING) {
             Channel ch = ctx.channel();
@@ -62,12 +66,12 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
             json.put("username", player.getUsername());
             json.put("type", "player");
             String json_str = gson.toJson(json);
+
             log.info(json_str);
             ChannelFuture future = ctx.writeAndFlush(json_str);
 
             future.addListener((chFuture) -> {
-                log.info("Data sent");
-                addPlayer(player);
+                addPlayer(player, gameID);
             });
         }
     }
@@ -76,6 +80,9 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String s) throws Exception {
+        int gameID = ctx.channel().attr(GameServer.GAME_ID).get();
+        GameSession game = games.get(gameID);
+
         if (game.getState() == GameSessionState.IN_PROGRESS) {
             log.info("Received move: " + s);
             GameInfo move = gson.fromJson(s, GameInfo.class);
@@ -84,7 +91,7 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
 
             if (current.getId() == sender.getId()) {
                 if (move != null) {
-                    handleMove(ctx, move, sender);
+                    handleMove(ctx, game, move, sender);
                 } else {
                     log.error("Unable to parse GameInfo json");
                 }
@@ -104,8 +111,10 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
     }
 
 
-    private void handleMove(ChannelHandlerContext ctx, GameInfo info, Player player) {
-        this.game.performMove(info, new GameSessionCallback() {
+    private void handleMove(ChannelHandlerContext ctx, GameSession game ,GameInfo info, Player player) {
+        ChannelGroup channelGroup = channelGroups.get(game.getId());
+
+        game.performMove(info, new GameSessionCallback() {
             @Override
             public void onAccept(Boolean won, GameInfo gameInfo) {
                 GameInfoMessage message = new GameInfoMessage(gameInfo);
@@ -129,13 +138,18 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
         });
     }
 
-    private void sendCurrentTurnMsg(Player next) {
+    private void sendCurrentTurnMsg(GameSession game, Player next) {
+        ChannelGroup channelGroup = channelGroups.get(game.getId());
+
         Message msg = new TurnMessage(next.getId());
         channelGroup.writeAndFlush(msg.toJson());
     }
 
     private void sendInitialMessage(GameSession session) {
-        log.info("Game starts");
+        ChannelGroup channelGroup = channelGroups.get(session.getId());
+
+        log.info("Game with id: " + session.getId() + "starts");
+
         InitialMessage initMessage = new InitialMessage(session);
         ChannelGroupFuture future = channelGroup.writeAndFlush(initMessage.toJson());
 
@@ -150,9 +164,18 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
 
     }
 
+    private void createGame() {
+        GameSession session = new GameSession(2, new StandardBoardBuilder());
+        ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+        session.addObserver(this);
+        this.games.put(session.getId(), session);
+        this.channelGroups.put(session.getId(), channelGroup);
+    }
 
-    private void addPlayer(Player player) {
-        this.game.addPlayer(player);
+
+    private void addPlayer(Player player, int gameID) {
+        GameSession game = games.get(gameID);
+        game.addPlayer(player);
     }
 
 
@@ -162,13 +185,13 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
     @Override
     public void onStateChange(GameSession session, GameSessionState state) {
         if(state == GameSessionState.IN_PROGRESS) {
-            sendInitialMessage(this.game);
+            sendInitialMessage(session);
         }
     }
 
     @Override
     public void onPlayerChange(GameSession session, Player current) {
-        sendCurrentTurnMsg(current);
+        sendCurrentTurnMsg(session, current);
     }
 
     @Override

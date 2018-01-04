@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
+ * Utility class contains set of helper methods for server handlers.
  * Created by kacperraczy on 27.12.2017.
  */
 public class Utility {
@@ -60,23 +61,38 @@ public class Utility {
     }
 
 
-
+    /**
+     * Gets customised Gson object with AnnotatedDeserializer and Iso8601DateTypeAdapter.
+     * @return gson object
+     */
     public static Gson getGson() {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(GameInfo.class, new AnnotatedDeserializer<GameInfo>());
         builder.registerTypeAdapter(GameInfoMessage.class , new AnnotatedDeserializer<GameInfoMessage>());
         builder.registerTypeAdapter(Message.class, new AnnotatedDeserializer<Message>());
         builder.registerTypeAdapter(LoginMessage.class, new AnnotatedDeserializer<LoginMessage>());
-        //builder.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         builder.registerTypeAdapter(Date.class, new Iso8601DateTypeAdapter());
 
         return builder.create();
     }
 
+    /**
+     * See sessionToJson(Board, ArrayList<Players>
+     * @param session
+     * @return
+     */
+
     public static String sessionToJson(GameSession session) {
         return sessionToJson(session.getBoard(), session.getPlayers());
     }
 
+
+    /**
+     * Creates json object containing all the infomation about board design and participating players.
+     * @param board Board object
+     * @param players participating players
+     * @return JSON String
+     */
     public static String sessionToJson(Board board, ArrayList<Player> players) {
         Writer strWriter = new StringWriter();
         JsonWriter writer = new JsonWriter(strWriter);
