@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
+ * Base class for building boards objects.
  * Created by kacperraczy on 11.12.2017.
  */
 public abstract class BoardBuilder {

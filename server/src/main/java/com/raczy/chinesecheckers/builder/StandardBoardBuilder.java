@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Standard implementation of BoardBuilder interface
  * Created by kacperraczy on 11.12.2017.
  */
 public class StandardBoardBuilder extends BoardBuilder {

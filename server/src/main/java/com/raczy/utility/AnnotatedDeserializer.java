@@ -12,6 +12,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 /**
+ * JsonDeserializer subclass 
  * Created by kacperraczy on 30.12.2017.
  */
 

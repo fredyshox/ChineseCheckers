@@ -1,6 +1,7 @@
 package com.raczy.chinesecheckers;
 
 /**
+ * Data class representing player participating in the game
  * Created by kacperraczy on 12.12.2017.
  */
 public class Player {

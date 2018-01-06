@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 /**
+ * StringEncoder subclass which adds carriage return delimiter to the end of message.
  * Created by kacperraczy on 03.01.2018.
  */
 

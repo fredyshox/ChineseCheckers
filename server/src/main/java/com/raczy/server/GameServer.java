@@ -10,7 +10,7 @@ import io.netty.util.AttributeKey;
 import java.util.ArrayList;
 
 /**
- *
+ * Entry point of the app. It starts socket and http server instances.
  * Created by kacperraczy on 21.12.2017.
  */
 public class GameServer {

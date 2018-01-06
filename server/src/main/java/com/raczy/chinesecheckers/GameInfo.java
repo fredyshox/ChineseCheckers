@@ -5,6 +5,7 @@ import com.raczy.utility.JsonRequired;
 import java.util.Date;
 
 /**
+ * Data class holding information about move
  * Created by kacperraczy on 12.12.2017.
  */
 public class GameInfo {

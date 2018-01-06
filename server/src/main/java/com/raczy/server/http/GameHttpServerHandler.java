@@ -32,37 +32,6 @@ public class GameHttpServerHandler extends SimpleChannelInboundHandler<Object> {
     private static  Gson gson = Utility.getGson();
     private GameHandlerAdapter delegate;
 
-    public static void main(String[] args) {
-        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
-
-        try {
-            ServerBootstrap b = new ServerBootstrap();
-            b.group(bossGroup, workerGroup)
-             .channel(NioServerSocketChannel.class)
-             .childHandler(new ChannelInitializer<SocketChannel>() {
-                 @Override
-                 protected void initChannel(SocketChannel ch) throws Exception {
-                     ChannelPipeline p = ch.pipeline();
-
-                     p.addLast(new HttpRequestDecoder());
-                     p.addLast(new HttpResponseEncoder());
-                     p.addLast(new GameHttpServerHandler());
-                 }
-             });
-
-            Channel ch = b.bind(7070).sync().channel();
-
-            ch.closeFuture().sync();
-
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            bossGroup.shutdownGracefully();
-            workerGroup.shutdownGracefully();
-        }
-    }
-
     private HttpRequest request;
 
     @Override

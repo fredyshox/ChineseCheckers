@@ -3,6 +3,7 @@ package com.raczy.chinesecheckers;
 import java.util.Arrays;
 
 /**
+ * Graph Node class holding info about player's checker presence and references to neighbours.
  * Created by kacperraczy on 12.12.2017.
  */
 public class Field {

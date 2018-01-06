@@ -7,7 +7,8 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
 /**
- * Graph class
+ * Class representing game board holding references to all fields.
+ * The referenced Field objects are creating graph structure.
  * Created by kacperraczy on 10.12.2017.
  */
 public class Board {

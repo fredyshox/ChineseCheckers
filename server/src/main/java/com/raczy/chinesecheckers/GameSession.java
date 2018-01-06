@@ -15,6 +15,9 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
+ * Main class for creating and managing ChineseCheckers session.
+ * It creates board with provided builder class and validates moves using GameMove object.
+ * Also responsible for turn management.
  * Created by kacperraczy on 12.12.2017.
  */
 public class GameSession {
