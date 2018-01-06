@@ -1,9 +1,12 @@
-package com.raczy.server;
+package com.raczy.server.socket;
 
 import com.google.gson.Gson;
 import com.raczy.chinesecheckers.*;
 import com.raczy.chinesecheckers.builder.StandardBoardBuilder;
 import com.raczy.chinesecheckers.exceptions.GameException;
+import com.raczy.server.GameHandlerAdapter;
+import com.raczy.server.GameServer;
+import com.raczy.server.Utility;
 import com.raczy.server.message.*;
 import io.netty.channel.*;
 import io.netty.channel.group.ChannelGroup;
@@ -13,25 +16,26 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Handler class which is responsible for game traffic and management.
+ * It controls multiple game instances at the same time.
  * Created by kacperraczy on 21.12.2017.
  */
 
 @ChannelHandler.Sharable
-public class GameServerHandler extends SimpleChannelInboundHandler<String> implements GameSessionObserver, LoginServerDelegate {
+public class GameSocketServerHandler extends SimpleChannelInboundHandler<String> implements GameSessionObserver, GameHandlerAdapter {
 
-    private static Logger log = LogManager.getLogger(GameServerHandler.class);
+    private static Logger log = LogManager.getLogger(GameSocketServerHandler.class);
     private Gson gson = Utility.getGson();
 
     //Games
     private Map<Integer, GameSession> games;
     private Map<Integer, ChannelGroup> channelGroups;
 
-    public GameServerHandler() {
+    public GameSocketServerHandler() {
         super();
 
         this.games = new HashMap<>();
@@ -74,6 +78,20 @@ public class GameServerHandler extends SimpleChannelInboundHandler<String> imple
                 addPlayer(player, gameID);
             });
         }
+    }
+
+    @Override
+    public int createGame(ChannelHandlerContext ctx, int playerNo, String name) {
+        GameSession session = new GameSession(playerNo, new StandardBoardBuilder());
+        session.setTitle(name);
+        this.games.put(session.getId(), session);
+
+        return session.getId();
+    }
+
+    @Override
+    public GameSession[] availableGames(ChannelHandlerContext ctx) {
+        return games.values().toArray(new GameSession[0]);
     }
 
     ////////

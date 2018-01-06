@@ -1,7 +1,6 @@
-package com.raczy.server;
+package com.raczy.server.socket;
 
 import com.raczy.server.util.CarriageReturnEncoder;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -12,16 +11,17 @@ import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
 
 /**
+ * Socket channel initializer
  * Created by kacperraczy on 21.12.2017.
  */
 
-public class GameServerInitializer extends ChannelInitializer<SocketChannel> {
+public class GameSocketServerInitializer extends ChannelInitializer<SocketChannel> {
 
     private static final StringDecoder DECODER = new StringDecoder(CharsetUtil.UTF_8);
     private static final StringEncoder ENCODER = new CarriageReturnEncoder(CharsetUtil.UTF_8);
 
-    private static final LoginServerHandler LOGIN_HANDLER = new LoginServerHandler();
-    private static final GameServerHandler SERVER_HANDLER = new GameServerHandler();
+    public static final LoginSocketServerHandler LOGIN_HANDLER = new LoginSocketServerHandler();
+    public static final GameSocketServerHandler SERVER_HANDLER = new GameSocketServerHandler();
 
     static {
         LOGIN_HANDLER.setDelegate(SERVER_HANDLER);

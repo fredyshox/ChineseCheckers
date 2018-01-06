@@ -9,6 +9,7 @@ import com.raczy.chinesecheckers.builder.StandardBoardBuilder;
 import com.raczy.server.message.GameInfoMessage;
 import com.raczy.server.message.LoginMessage;
 import com.raczy.server.message.Message;
+import com.raczy.server.message.SessionMessage;
 import com.raczy.utility.AnnotatedDeserializer;
 import com.raczy.utility.Iso8601DateTypeAdapter;
 import org.apache.logging.log4j.LogManager;
@@ -71,6 +72,7 @@ public class Utility {
         builder.registerTypeAdapter(GameInfoMessage.class , new AnnotatedDeserializer<GameInfoMessage>());
         builder.registerTypeAdapter(Message.class, new AnnotatedDeserializer<Message>());
         builder.registerTypeAdapter(LoginMessage.class, new AnnotatedDeserializer<LoginMessage>());
+        builder.registerTypeAdapter(SessionMessage.class, new AnnotatedDeserializer<SessionMessage>());
         builder.registerTypeAdapter(Date.class, new Iso8601DateTypeAdapter());
 
         return builder.create();

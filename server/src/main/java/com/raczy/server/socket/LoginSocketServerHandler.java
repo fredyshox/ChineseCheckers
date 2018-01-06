@@ -1,28 +1,31 @@
-package com.raczy.server;
+package com.raczy.server.socket;
 
 import com.google.gson.Gson;
 
 import com.raczy.chinesecheckers.Player;
 import com.raczy.chinesecheckers.util.GraphIDGenerator;
+import com.raczy.server.GameHandlerAdapter;
+import com.raczy.server.GameServer;
+import com.raczy.server.Utility;
 import com.raczy.server.message.ErrorMessage;
 import com.raczy.server.message.LoginMessage;
 
-import com.raczy.server.message.Message;
 import io.netty.channel.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
+ * Handler class responsible for logging users and delegating them to desired game instance.
  * Created by kacperraczy on 29.12.2017.
  */
 @ChannelHandler.Sharable
-public class LoginServerHandler extends SimpleChannelInboundHandler<String>{
+public class LoginSocketServerHandler extends SimpleChannelInboundHandler<String>{
 
-    private static Logger log = LogManager.getLogger(LoginServerHandler.class);
+    private static Logger log = LogManager.getLogger(LoginSocketServerHandler.class);
     private Gson gson = Utility.getGson();
     private GraphIDGenerator playerIDGenerator = new GraphIDGenerator();
-    private LoginServerDelegate delegate;
+    private GameHandlerAdapter delegate;
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -58,7 +61,7 @@ public class LoginServerHandler extends SimpleChannelInboundHandler<String>{
     protected void next(ChannelHandlerContext ctx) {
         ChannelPipeline pipeline = ctx.pipeline();
         pipeline.remove(this);
-        GameServerInitializer.applyGameHandler(ctx);
+        GameSocketServerInitializer.applyGameHandler(ctx);
 
     }
 
@@ -68,11 +71,11 @@ public class LoginServerHandler extends SimpleChannelInboundHandler<String>{
         ctx.close();
     }
 
-    public LoginServerDelegate getDelegate() {
+    public GameHandlerAdapter getDelegate() {
         return delegate;
     }
 
-    public void setDelegate(LoginServerDelegate delegate) {
+    public void setDelegate(GameHandlerAdapter delegate) {
         this.delegate = delegate;
     }
 }

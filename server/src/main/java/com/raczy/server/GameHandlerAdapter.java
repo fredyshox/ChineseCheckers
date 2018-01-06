@@ -1,12 +1,16 @@
 package com.raczy.server;
 
+import com.raczy.chinesecheckers.GameSession;
 import com.raczy.chinesecheckers.Player;
 import io.netty.channel.ChannelHandlerContext;
 
 /**
- * Created by kacperraczy on 30.12.2017.
+ * Adapter class
+ * Created by kacperraczy on 05.01.2018.
  */
-public interface LoginServerDelegate {
+public interface GameHandlerAdapter {
     void playerJoined(ChannelHandlerContext ctx, Player player, int gameID);
     boolean playerCanJoin(ChannelHandlerContext ctx, Player player, int gameID);
+    int createGame(ChannelHandlerContext ctx, int playerNo, String name);
+    GameSession[] availableGames(ChannelHandlerContext ctx);
 }
