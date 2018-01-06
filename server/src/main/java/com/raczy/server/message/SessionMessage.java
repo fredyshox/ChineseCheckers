@@ -13,22 +13,29 @@ public class SessionMessage extends Message {
     private String title;
 
     @JsonRequired
-    private int playerNo;
+    private int playerCount;
 
-    public SessionMessage(int gameID, String title, int playerNo) {
+    private int currentPlayerCount;
+
+    public SessionMessage(int gameID, String title, int playerNo, int currentPlayerNo) {
         super("game");
 
         this.gameID = gameID;
         this.title = title;
-        this.playerNo = playerNo;
+        this.playerCount = playerNo;
+        this.currentPlayerCount = currentPlayerNo;
     }
 
     public int getGameID() {
         return gameID;
     }
 
-    public int getPlayerNo() {
-        return playerNo;
+    public int getPlayerCount() {
+        return playerCount;
+    }
+
+    public int getCurrentPlayerCount() {
+        return currentPlayerCount;
     }
 
     public String getTitle() {

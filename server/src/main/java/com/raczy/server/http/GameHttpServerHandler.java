@@ -89,7 +89,7 @@ public class GameHttpServerHandler extends SimpleChannelInboundHandler<Object> {
             String body = bodyBuf.toString(CharsetUtil.UTF_8);
             SessionMessage sessionMsg = gson.fromJson(body, SessionMessage.class);
             if (sessionMsg != null) {
-                if (createGameSession(ctx, sessionMsg.getPlayerNo(), sessionMsg.getTitle())) {
+                if (createGameSession(ctx, sessionMsg.getPlayerCount(), sessionMsg.getTitle())) {
                     responseJson = "{\"status\": \"OK\"}";
                 }else {
                     ErrorMessage err = new ErrorMessage("Unable to reach socket server");
@@ -114,7 +114,8 @@ public class GameHttpServerHandler extends SimpleChannelInboundHandler<Object> {
         if (games != null) {
             ArrayList<SessionMessage> sessionArr = new ArrayList<>();
             for (GameSession game: games) {
-                sessionArr.add(new SessionMessage(game.getId(), game.getTitle(), game.getExpectedPlayerCount()));
+                int currentPlayerCount = game.getPlayers().size();
+                sessionArr.add(new SessionMessage(game.getId(), game.getTitle(), game.getExpectedPlayerCount(), currentPlayerCount));
             }
             responseJson = gson.toJson(sessionArr);
         }else {
