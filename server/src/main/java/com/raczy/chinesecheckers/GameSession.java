@@ -23,6 +23,8 @@ public class GameSession {
     private Random randomGenerator = new Random();
 
     private int id;
+    private String title;
+
     private ArrayList<Player> players;
     private int expectedPlayerCount;
     private BoardBuilder builder;
@@ -226,5 +228,17 @@ public class GameSession {
 
     public int getId() {
         return id;
+    }
+
+    public int getExpectedPlayerCount() {
+        return expectedPlayerCount;
+    }
+
+    public String getTitle() {
+        return (title != null) ? title : "Game" + id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
