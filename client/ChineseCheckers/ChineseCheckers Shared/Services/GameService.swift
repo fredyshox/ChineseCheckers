@@ -149,13 +149,10 @@ extension GameService: GCDAsyncSocketDelegate {
     func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
         log.info("Connected server: host - " + host + ", port: " + port.description)
     }
-    
-    func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
-        
-    }
-    
+
     func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
-        log.info("Disconnected from server.");
+        let err = ErrorInfo(cause: "Disconnected from server")
+        self._delegate?.service(self, didReceiveError: err)
     }
     
     func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {

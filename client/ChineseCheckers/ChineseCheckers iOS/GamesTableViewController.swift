@@ -41,7 +41,7 @@ class GamesTableViewController: UITableViewController {
     }
     
     @IBAction func addGame(_ sender: UIBarButtonItem) {
-        //perform segue
+        performSegue(withIdentifier: "addGameSegue", sender: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -109,6 +109,8 @@ class GamesTableViewController: UITableViewController {
         }))
         
         present(alert, animated: true, completion: nil)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -51,6 +51,7 @@
 		E2675CDF1FF5D28500E49AE7 /* GameSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */; };
 		E2675CE01FF5D36900E49AE7 /* GameSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */; };
 		E286D8571FFAFF0A0002956A /* service.plist in Resources */ = {isa = PBXBuildFile; fileRef = E286D8561FFAFF0A0002956A /* service.plist */; };
+		E29AA3652002D0A600343294 /* AddGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29AA3642002D0A600343294 /* AddGameViewController.swift */; };
 		E2A13B0A20026C8C0049E129 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A13B0920026C8C0049E129 /* InfoView.swift */; };
 		E2A13B0C20026CA20049E129 /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2A13B0B20026CA20049E129 /* InfoView.xib */; };
 		E2A13B0E20026F980049E129 /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A13B0D20026F980049E129 /* RoundView.swift */; };
@@ -115,6 +116,7 @@
 		E2675CDB1FF5C75300E49AE7 /* GameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfo.swift; sourceTree = "<group>"; };
 		E2675CDE1FF5D28500E49AE7 /* GameSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSessionDelegate.swift; sourceTree = "<group>"; };
 		E286D8561FFAFF0A0002956A /* service.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = service.plist; sourceTree = "<group>"; };
+		E29AA3642002D0A600343294 /* AddGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGameViewController.swift; sourceTree = "<group>"; };
 		E2A13B0920026C8C0049E129 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		E2A13B0B20026CA20049E129 /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		E2A13B0D20026F980049E129 /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				E21FD86A1FF13D7F00B97766 /* AppDelegate.swift */,
 				E21FD86C1FF13D7F00B97766 /* GameViewController.swift */,
 				E2B84CE92001947600405CE0 /* GamesTableViewController.swift */,
+				E29AA3642002D0A600343294 /* AddGameViewController.swift */,
 				E21FD86E1FF13D7F00B97766 /* Main.storyboard */,
 				E21FD8711FF13D7F00B97766 /* LaunchScreen.storyboard */,
 				E21FD8741FF13D7F00B97766 /* Info.plist */,
@@ -541,6 +544,7 @@
 				E2B84CEF200197B300405CE0 /* SessionInfo.swift in Sources */,
 				E2675CDF1FF5D28500E49AE7 /* GameSessionDelegate.swift in Sources */,
 				E21FD8941FF1CF7D00B97766 /* HexagonNode.swift in Sources */,
+				E29AA3652002D0A600343294 /* AddGameViewController.swift in Sources */,
 				E2B84CEA2001947600405CE0 /* GamesTableViewController.swift in Sources */,
 				E252E4E71FF2F03F008DCC3D /* Board.swift in Sources */,
 				E2F3AC2B1FF734D600B44941 /* LoginInfo.swift in Sources */,

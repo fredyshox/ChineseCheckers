@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.6.0)
   - CocoaAsyncSocket (7.6.1)
+  - Eureka (4.0.1)
   - MBProgressHUD (1.0.0)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
@@ -14,6 +15,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - CocoaAsyncSocket
+  - Eureka
   - MBProgressHUD (~> 1.0.0)
   - SlidingSideView (from `https://github.com/fredyshox/SlidingSideView.git`, tag `0.3.1`)
   - XCGLogger
@@ -31,11 +33,12 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
+  Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   SlidingSideView: 5b505fc485e32685a5efdc7dbf507ae1ed926951
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
 
-PODFILE CHECKSUM: 48d6f073c6817e1c69dd31b8eb83686369de487c
+PODFILE CHECKSUM: 95e154fdd51fa68ab22edb1b7865925e368e34a7
 
 COCOAPODS: 1.2.0
