@@ -295,7 +295,7 @@ class GameScene: SKScene {
     //MARK: Colors & Graphics
     
     #if os(iOS)
-    public static let fieldColor: UIColor = UIColor.hexStringToUIColor(hex: "#EBEBEB")
+    public static let fieldColor: UIColor = UIColor.hexStringToUIColor(hex: "#939393")
     
     func checkerColor(zone: Int) -> UIColor{
     let colors = ["#00077A", "#03BD5B", "#BF0A46", "#FF9947", "#A939B9", "#000000"]
@@ -304,7 +304,7 @@ class GameScene: SKScene {
     return UIColor.hexStringToUIColor(hex: hexString)
     }
     #elseif os(OSX)
-    public static let fieldColor: NSColor = NSColor.hexStringToNSColor(hex: "#EBEBEB")
+    public static let fieldColor: NSColor = NSColor.hexStringToNSColor(hex: "#939393")
     
     func checkerColor(zone: Int) -> NSColor {
         let colors = ["#00077A", "#03BD5B", "#BF0A46", "#FF9947", "#A939B9", "#000000"]

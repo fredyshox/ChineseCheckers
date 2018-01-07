@@ -5,10 +5,10 @@
 	<key>httpPort</key>
 	<integer>1337</integer>
 	<key>httpUrl</key>
-	<string>http://192.168.1.22</string>
+	<string>http://192.168.0.10</string>
 	<key>port</key>
 	<integer>8080</integer>
 	<key>url</key>
-	<string>192.168.1.22</string>
+	<string>192.168.0.10</string>
 </dict>
 </plist>

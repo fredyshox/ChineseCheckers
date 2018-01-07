@@ -201,6 +201,7 @@ extension GameService: GCDAsyncSocketDelegate {
                 if let turnInfo = TurnInfo(dict: json) {
                     self._currentTurn = turnInfo
                     log.info("Turn info: player with id: \(turnInfo.playerID)")
+                    self._delegate?.service(self, didReceiveTurnInfo: turnInfo)
                 }
             case "result":
                 if let resultInfo = ResultInfo(dict: json) {

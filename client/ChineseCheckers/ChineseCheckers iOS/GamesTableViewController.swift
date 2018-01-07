@@ -120,6 +120,7 @@ class GamesTableViewController: UITableViewController {
             if let destVC = segue.destination as? GameViewController {
                 destVC.service = gameService
                 gameService.delegate = nil
+                currentGameService = nil
             }
         default:
             break
@@ -129,6 +130,7 @@ class GamesTableViewController: UITableViewController {
 
 extension GamesTableViewController: GameServiceDelegate {
     func service(_ service: GameService, didReceiveError error: ErrorInfo) {
+        MBProgressHUD.hide(for: self.navigationController!.view, animated: true)
         
     }
     

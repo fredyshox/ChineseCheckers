@@ -79,7 +79,22 @@ extension UIImage {
 }
 
 
+extension CGColor {
+}
+
 extension UIColor {
+    //Only rgb color space
+    static func rgba2rgb(background: UIColor, color: UIColor) -> UIColor {
+        let bgCg = background.cgColor
+        let colorCg = color.cgColor
+        let alpha = colorCg.alpha
+        
+        return UIColor(red: (1 - alpha) * bgCg.components![0] + colorCg.components![0],
+                       green: (1 - alpha) * bgCg.components![1] + colorCg.components![1],
+                       blue: (1 - alpha) * bgCg.components![2] + colorCg.components![2],
+                       alpha: 1.0)
+    }
+    
     static func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
