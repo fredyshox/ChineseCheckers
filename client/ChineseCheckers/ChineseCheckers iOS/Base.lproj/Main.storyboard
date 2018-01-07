@@ -24,7 +24,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1402" y="116"/>
+            <point key="canvasLocation" x="582" y="116"/>
         </scene>
         <!--Games Table View Controller-->
         <scene sceneID="BpI-ii-zyb">
@@ -97,11 +97,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="mV5-DG-uxh">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refresh:" destination="FrR-hL-P4L" eventType="valueChanged" id="eZG-nz-mz9"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <segue destination="BV1-FR-VrT" kind="presentation" identifier="showGameVC" id="OXJ-dV-jkZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zE-kA-yhN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -157,12 +161,11 @@
                     <navigationItem key="navigationItem" id="0kX-Sw-11I"/>
                     <connections>
                         <outlet property="usernameTextField" destination="syt-qE-eMO" id="7tu-gU-B7U"/>
-                        <segue destination="BV1-FR-VrT" kind="presentation" identifier="showGameVC" id="hzf-gO-Fyz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tDu-uq-rWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="606" y="116"/>
+            <point key="canvasLocation" x="446" y="-612"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ggH-2l-6fK">

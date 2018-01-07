@@ -60,7 +60,6 @@
 		E2B84CF420019F4700405CE0 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B84CF320019F4700405CE0 /* Utility.swift */; };
 		E2B84CF520019F4700405CE0 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B84CF320019F4700405CE0 /* Utility.swift */; };
 		E2EA71FC1FFBF67200E0CDC9 /* service.plist in Resources */ = {isa = PBXBuildFile; fileRef = E286D8561FFAFF0A0002956A /* service.plist */; };
-		E2EA71FE1FFC060100E0CDC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA71FD1FFC060100E0CDC9 /* LoginViewController.swift */; };
 		E2F3AC201FF7266D00B44941 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC1F1FF7266D00B44941 /* GameService.swift */; };
 		E2F3AC211FF726B400B44941 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC1F1FF7266D00B44941 /* GameService.swift */; };
 		E2F3AC231FF7315C00B44941 /* TurnInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3AC221FF7315C00B44941 /* TurnInfo.swift */; };
@@ -119,7 +118,6 @@
 		E2B84CEE200197B300405CE0 /* SessionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInfo.swift; sourceTree = "<group>"; };
 		E2B84CF020019D1100405CE0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		E2B84CF320019F4700405CE0 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		E2EA71FD1FFC060100E0CDC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E2EA71FF1FFC0D0B00E0CDC9 /* MBProgressHUD-bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-bridge.h"; sourceTree = "<group>"; };
 		E2F3AC1F1FF7266D00B44941 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
 		E2F3AC221FF7315C00B44941 /* TurnInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnInfo.swift; sourceTree = "<group>"; };
@@ -216,7 +214,6 @@
 				E21FD86A1FF13D7F00B97766 /* AppDelegate.swift */,
 				E21FD86C1FF13D7F00B97766 /* GameViewController.swift */,
 				E2B84CE92001947600405CE0 /* GamesTableViewController.swift */,
-				E2EA71FD1FFC060100E0CDC9 /* LoginViewController.swift */,
 				E21FD86E1FF13D7F00B97766 /* Main.storyboard */,
 				E21FD8711FF13D7F00B97766 /* LaunchScreen.storyboard */,
 				E21FD8741FF13D7F00B97766 /* Info.plist */,
@@ -547,7 +544,6 @@
 				E2B84CED2001968700405CE0 /* GameTableViewCell.swift in Sources */,
 				E2B84CF120019D1100405CE0 /* DataService.swift in Sources */,
 				E2F3AC231FF7315C00B44941 /* TurnInfo.swift in Sources */,
-				E2EA71FE1FFC060100E0CDC9 /* LoginViewController.swift in Sources */,
 				E2675CDC1FF5C75300E49AE7 /* GameInfo.swift in Sources */,
 				E2F3AC251FF7320300B44941 /* ErrorInfo.swift in Sources */,
 				E24026491FF47A0F0069D0FA /* GameSession.swift in Sources */,
