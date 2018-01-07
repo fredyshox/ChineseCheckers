@@ -3,6 +3,7 @@ project 'ChineseCheckers.xcodeproj'
 def shared_pods
   pod 'XCGLogger'
   pod 'CocoaAsyncSocket'
+  pod 'Alamofire'
 end
 
 target 'ChineseCheckers iOS' do
@@ -13,6 +14,7 @@ target 'ChineseCheckers iOS' do
   shared_pods
   pod 'MBProgressHUD', '~> 1.0.0'
   pod 'SlidingSideView', :git => 'https://github.com/fredyshox/SlidingSideView.git', :tag => '0.3.1'
+  
   
 end
 

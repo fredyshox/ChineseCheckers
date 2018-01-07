@@ -12,7 +12,7 @@ import CocoaAsyncSocket
 class GameService: NSObject{
     
     //properties
-    fileprivate static let serviceData: [String:Any] = readPlist()
+    fileprivate static let serviceData: [String:Any] = Utility.readPlist(name: "service")
     fileprivate var _session: GameSession! {
         didSet {
             if let turnInfo = _currentTurn {
@@ -77,22 +77,6 @@ class GameService: NSObject{
     private func setUpCoders() {
         encoder.dataEncodingStrategy = .deferredToData
         encoder.dateEncodingStrategy = .millisecondsSince1970
-    }
-    
-    fileprivate static func readPlist() -> [String:Any] {
-        let plistPath = Bundle.main.path(forResource: "service", ofType: "plist")!
-        let plistXML = FileManager.default.contents(atPath: plistPath)!
-        var plistFormat = PropertyListSerialization.PropertyListFormat.xml
-        var plistData = [String:Any]()
-        
-        do {
-            
-            plistData = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &plistFormat) as! [String:Any]
-        }catch {
-            log.error(error.localizedDescription)
-        }
-        
-        return plistData
     }
     
     //MARK: Getters/Setters

@@ -95,21 +95,17 @@ class SelectedHexState: GameSceneState {
     
     func performMove(scene: GameScene, to hex: HexagonNode) {
         if let checker = checker {
-            let moveAction = SKAction.move(to: hex.position, duration: 0.3)
             let checkerFieldName = scene.findFieldHex(point: checker.position)?.name
             
-            checker.run(moveAction, completion: {
-                let service = scene.service
-                if  let fieldName = hex.name,
-                    let fieldIndex = scene.hexIndex(checkerName: fieldName),
-                    let checkerFieldName = checkerFieldName,
-                    let checkerFieldIndex = scene.hexIndex(checkerName: checkerFieldName) {
-                    let info = GameInfo(date: Date(), from: checkerFieldIndex, to: fieldIndex)
-                    
-                    //should send to server
-                    service.sendMove(gameInfo: info)
-                }
-            })
+            let service = scene.service
+            if  let fieldName = hex.name,
+                let fieldIndex = scene.hexIndex(checkerName: fieldName),
+                let checkerFieldName = checkerFieldName,
+                let checkerFieldIndex = scene.hexIndex(checkerName: checkerFieldName) {
+                let info = GameInfo(date: Date(), from: checkerFieldIndex, to: fieldIndex)
+                
+                service.sendMove(gameInfo: info)
+            }
         }
         
         setPossibleVisibility(scene: scene, hex: hex)

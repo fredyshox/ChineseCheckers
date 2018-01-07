@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.6.0)
   - CocoaAsyncSocket (7.6.1)
   - MBProgressHUD (1.0.0)
   - ObjcExceptionBridging (1.0.1):
@@ -11,6 +12,7 @@ PODS:
     - ObjcExceptionBridging
 
 DEPENDENCIES:
+  - Alamofire
   - CocoaAsyncSocket
   - MBProgressHUD (~> 1.0.0)
   - SlidingSideView (from `https://github.com/fredyshox/SlidingSideView.git`, tag `0.3.1`)
@@ -27,12 +29,13 @@ CHECKOUT OPTIONS:
     :tag: 0.3.1
 
 SPEC CHECKSUMS:
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   SlidingSideView: 5b505fc485e32685a5efdc7dbf507ae1ed926951
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
 
-PODFILE CHECKSUM: 76f514e74a4f02e42b1ca27a4b83809bb533dd17
+PODFILE CHECKSUM: 48d6f073c6817e1c69dd31b8eb83686369de487c
 
 COCOAPODS: 1.2.0

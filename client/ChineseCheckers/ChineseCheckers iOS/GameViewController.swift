@@ -9,9 +9,12 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import SlidingSideView
 
 class GameViewController: UIViewController {
     var service: GameService!
+    
+    private var roundLabel: RoundLabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +28,22 @@ class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         skView.showsFPS = true
         skView.showsNodeCount = true
+        
+        // Navigation bar
+        setUpNavigationBar()
+        
+        // Sliding Side View
+        let ssv = SlidingSideView(.top, withNormalHeight: 100.0)
+        ssv.topLayoutGuide = self.topLayoutGuide
+        
+        self.view.addSubview(ssv)
+    }
+    
+    func setUpNavigationBar() {
+        let roundLabel = RoundLabel()
+        
+        self.navigationItem.titleView = roundLabel
+        self.roundLabel = roundLabel
     }
 
     override var shouldAutorotate: Bool {
@@ -47,4 +66,8 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+}
+
+extension GameViewController: GameServiceDelegate {
+    
 }
