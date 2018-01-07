@@ -129,7 +129,21 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
     }
 
 
-    private void handleMove(ChannelHandlerContext ctx, GameSession game ,GameInfo info, Player player) {
+    @Override
+    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+        super.channelUnregistered(ctx);
+
+        Channel ch = ctx.channel();
+        int gameId = ch.attr(GameServer.GAME_ID).get();
+        Player player = ch.attr(GameServer.PLAYER_KEY).get();
+
+        GameSession session = games.get(gameId);
+        if (session != null) {
+            session.removePlayer(player);
+        }
+    }
+
+    private void handleMove(ChannelHandlerContext ctx, GameSession game , GameInfo info, Player player) {
         ChannelGroup channelGroup = channelGroups.get(game.getId());
 
         game.performMove(info, new GameSessionCallback() {

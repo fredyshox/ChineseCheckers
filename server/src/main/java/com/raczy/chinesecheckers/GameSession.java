@@ -176,6 +176,16 @@ public class GameSession {
         }
     }
 
+    public void removePlayer(Player p) {
+        this.players.remove(p);
+        this.expectedPlayerCount--;
+        if (state == GameSessionState.IN_PROGRESS) {
+            if (getCurrentPlayer().getId() == p.getId()) {
+                nextPlayer();
+            }
+        }
+    }
+
     public void addObserver(GameSessionObserver observer) {
         this.observers.add(observer);
     }
