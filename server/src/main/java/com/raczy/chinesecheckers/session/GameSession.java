@@ -1,5 +1,6 @@
-package com.raczy.chinesecheckers;
+package com.raczy.chinesecheckers.session;
 
+import com.raczy.chinesecheckers.*;
 import com.raczy.chinesecheckers.builder.BoardBuilder;
 import com.raczy.chinesecheckers.exceptions.ForbiddenMoveException;
 import com.raczy.chinesecheckers.exceptions.GameException;

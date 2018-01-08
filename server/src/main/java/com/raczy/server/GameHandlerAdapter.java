@@ -1,6 +1,6 @@
 package com.raczy.server;
 
-import com.raczy.chinesecheckers.GameSession;
+import com.raczy.chinesecheckers.session.GameSession;
 import com.raczy.chinesecheckers.Player;
 import io.netty.channel.ChannelHandlerContext;
 

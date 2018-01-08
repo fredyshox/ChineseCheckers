@@ -6,7 +6,7 @@ package com.raczy.server.message;
 public class ResultMessage extends Message {
 
     public enum Result {
-        WON, LOST
+        WON, DONE
     }
 
     private int playerID;

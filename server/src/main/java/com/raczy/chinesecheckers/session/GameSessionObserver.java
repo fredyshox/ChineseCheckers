@@ -1,4 +1,7 @@
-package com.raczy.chinesecheckers;
+package com.raczy.chinesecheckers.session;
+
+import com.raczy.chinesecheckers.GameInfo;
+import com.raczy.chinesecheckers.Player;
 
 /**
  * Interface which enables users to be notified about game state changes

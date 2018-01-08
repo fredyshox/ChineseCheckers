@@ -1,9 +1,13 @@
-package com.raczy.chinesecheckers;
+package com.raczy.chinesecheckers.session;
 
+import com.raczy.chinesecheckers.Board;
+import com.raczy.chinesecheckers.Field;
+import com.raczy.chinesecheckers.Player;
 import com.raczy.chinesecheckers.builder.BoardBuilder;
 import com.raczy.chinesecheckers.builder.StandardBoardBuilder;
 import com.raczy.chinesecheckers.mode.GameMode;
 import com.raczy.chinesecheckers.mode.StandardGameMode;
+import com.raczy.chinesecheckers.session.GameSession;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -2,8 +2,8 @@ package com.raczy.server.socket;
 
 import com.google.gson.Gson;
 import com.raczy.chinesecheckers.*;
-import com.raczy.chinesecheckers.builder.StandardBoardBuilder;
 import com.raczy.chinesecheckers.exceptions.GameException;
+import com.raczy.chinesecheckers.session.*;
 import com.raczy.server.GameHandlerAdapter;
 import com.raczy.server.GameServer;
 import com.raczy.server.Utility;
@@ -31,7 +31,7 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
     private static Logger log = LogManager.getLogger(GameSocketServerHandler.class);
     private Gson gson = Utility.getGson();
 
-    //Games
+    // MARK: Properties
     private Map<Integer, GameSession> games;
     private Map<Integer, ChannelGroup> channelGroups;
 
@@ -41,10 +41,10 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
         this.games = new HashMap<>();
         this.channelGroups = new HashMap<>();
 
-        createGame();
+        createGame(null, 2);
     }
 
-    //MARK: LoginServerDelegate
+    // MARK: LoginServerDelegate
 
 
     @Override
@@ -82,11 +82,7 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
 
     @Override
     public int createGame(ChannelHandlerContext ctx, int playerNo, String name) {
-        GameSession session = new GameSession(playerNo, new StandardBoardBuilder());
-        session.setTitle(name);
-        this.games.put(session.getId(), session);
-
-        return session.getId();
+        return createGame(name, playerNo);
     }
 
     @Override
@@ -94,7 +90,7 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
         return games.values().toArray(new GameSession[0]);
     }
 
-    ////////
+    // MARK: Handler methods
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String s) throws Exception {
@@ -137,11 +133,19 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
         int gameId = ch.attr(GameServer.GAME_ID).get();
         Player player = ch.attr(GameServer.PLAYER_KEY).get();
 
+        ErrorMessage err = new ErrorMessage(player.getUsername() + " disconnected.");
+        channelGroups.get(gameId).writeAndFlush(err.toJson());
+
+
+        //FIXME: error here
+        //end the game?
         GameSession session = games.get(gameId);
         if (session != null) {
             session.removePlayer(player);
         }
     }
+
+    // MARK: Game management
 
     private void handleMove(ChannelHandlerContext ctx, GameSession game , GameInfo info, Player player) {
         ChannelGroup channelGroup = channelGroups.get(game.getId());
@@ -170,6 +174,25 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
         });
     }
 
+    private int createGame(String title, int playerNo) {
+        GameSession session = new StandardGameSession(playerNo);
+        ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+        session.addObserver(this);
+        session.setTitle(title);
+        this.games.put(session.getId(), session);
+        this.channelGroups.put(session.getId(), channelGroup);
+
+        return session.getId();
+    }
+
+
+    private void addPlayer(Player player, int gameID) {
+        GameSession game = games.get(gameID);
+        game.addPlayer(player);
+    }
+
+    // MARK: Message sending
+
     private void sendCurrentTurnMsg(GameSession game, Player next) {
         ChannelGroup channelGroup = channelGroups.get(game.getId());
 
@@ -196,28 +219,23 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
 
     }
 
-    private void createGame() {
-        GameSession session = new GameSession(2, new StandardBoardBuilder());
-        ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
-        session.addObserver(this);
-        this.games.put(session.getId(), session);
-        this.channelGroups.put(session.getId(), channelGroup);
+    private void sendFinalMessage(GameSession session) {
+        ChannelGroup channelGroup = channelGroups.get(session.getId());
+        Message msg = new ResultMessage(-1, ResultMessage.Result.DONE);
+        channelGroup.writeAndFlush(msg.toJson());
     }
 
 
-    private void addPlayer(Player player, int gameID) {
-        GameSession game = games.get(gameID);
-        game.addPlayer(player);
-    }
-
-
-    //MARK: GameSessionObserver
+    // MARK: GameSessionObserver
 
 
     @Override
     public void onStateChange(GameSession session, GameSessionState state) {
         if(state == GameSessionState.IN_PROGRESS) {
             sendInitialMessage(session);
+        }else if (state == GameSessionState.DONE) {
+            log.info("Game with id " + session.getId() + " ended");
+            sendFinalMessage(session);
         }
     }
 

@@ -1,7 +1,7 @@
 package com.raczy.server.message;
 
 import com.google.gson.stream.JsonWriter;
-import com.raczy.chinesecheckers.GameSession;
+import com.raczy.chinesecheckers.session.GameSession;
 import com.raczy.server.Utility;
 
 import java.io.IOException;

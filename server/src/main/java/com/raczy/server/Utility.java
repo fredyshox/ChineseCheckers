@@ -6,6 +6,7 @@ import com.google.gson.stream.JsonWriter;
 import com.raczy.chinesecheckers.*;
 import com.raczy.chinesecheckers.builder.BoardBuilder;
 import com.raczy.chinesecheckers.builder.StandardBoardBuilder;
+import com.raczy.chinesecheckers.session.GameSession;
 import com.raczy.server.message.GameInfoMessage;
 import com.raczy.server.message.LoginMessage;
 import com.raczy.server.message.Message;

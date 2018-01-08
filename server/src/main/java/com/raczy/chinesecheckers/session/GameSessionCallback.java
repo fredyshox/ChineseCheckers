@@ -1,4 +1,4 @@
-package com.raczy.chinesecheckers;
+package com.raczy.chinesecheckers.session;
 
 import com.raczy.chinesecheckers.GameInfo;
 import com.raczy.chinesecheckers.exceptions.GameException;
