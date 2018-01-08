@@ -1,29 +1,29 @@
 package com.raczy.chinesecheckers;
 
 import com.raczy.chinesecheckers.builder.BoardBuilder;
-import com.raczy.chinesecheckers.builder.StandardBoardBuilder;
 import com.raczy.chinesecheckers.exceptions.ForbiddenMoveException;
 import com.raczy.chinesecheckers.exceptions.GameException;
 import com.raczy.chinesecheckers.mode.GameMode;
-import com.raczy.chinesecheckers.mode.StandardGameMode;
 import com.raczy.chinesecheckers.util.GraphIDGenerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 /**
  * Main class for creating and managing ChineseCheckers session.
  * It creates board with provided builder class and validates moves using GameMove object.
  * Also responsible for turn management.
- * Created by kacperraczy on 12.12.2017.
+ * Created by kacperraczy on 08.01.2018.
  */
-public class GameSession {
-    private static Logger log = LogManager.getLogger(GameSession.class);
+public abstract class GameSession {
+    protected static Logger log = LogManager.getLogger(GameSession.class);
     private static GraphIDGenerator idGenerator = new GraphIDGenerator();
     private Random randomGenerator = new Random();
+
+
+    //MARK: Properties
 
     private int id;
     private String title;
@@ -39,16 +39,33 @@ public class GameSession {
 
     private int queueCounter;
 
+    // MARK: Abstract
+
+    /**
+     * Initializes and return Board object built using provided builder class.
+     * Apart from board creation this method handles checkers distribution.
+     * @param builder builder object
+     * @param players players participating
+     * @return created Board instance
+     */
+
+    abstract protected Board createBoard(BoardBuilder builder, ArrayList<Player> players);
+
+    /**
+     * Initializes and returns GameMode object
+     * @return GameMode object
+     */
+    abstract protected GameMode createMode();
+
+
+    // MARK: Initialization
+
     public GameSession(int playerNo, BoardBuilder builder) {
         this.id = idGenerator.generate();
         this.expectedPlayerCount = playerNo;
         this.builder = builder;
-        setState(GameSessionState.WAITING);
         this.players = new ArrayList<>(playerNo);
-    }
-
-    public GameSession(ArrayList<Player> players) {
-        this(new StandardBoardBuilder(), players);
+        setState(GameSessionState.WAITING);
     }
 
     public GameSession(BoardBuilder builder, ArrayList<Player> players) {
@@ -59,50 +76,8 @@ public class GameSession {
         this.start();
     }
 
-    private Board createBoard(BoardBuilder builder, ArrayList<Player> players) {
-        int playerCount = players.size();
-        if (playerCount != 6 && playerCount != 4 && playerCount != 3 && playerCount != 2) {
-            //TODO exception
-            log.error("Too many players - max 6");
-            return null;
-        }
 
-        Player player;
-        int i;
-        boolean opposite = false;
-        Iterator<Player> iter = players.iterator();
-
-        builder.generateMainBoardPart();
-        for(i = 0; i < 6; i++) {
-            builder.generatePlayerBoardPart(i);
-        }
-
-        Board board = builder.getResult();
-
-        if(playerCount != 3) {
-            i = 0;
-            while(iter.hasNext()) {
-                player = iter.next();
-                player.setZoneID(i);
-                board.fillZone(i, player);
-                opposite = !opposite;
-                if(opposite) {
-                    i = Field.oppositeEdge(i);
-                }else {
-                    i = (i + 1) % 6;
-                }
-            }
-        }else {
-            //TODO Implement
-            log.error("Not implemented");
-            assert false;
-        }
-
-        return board;
-    }
-
-
-
+    // MARK:
 
     public void performMove(GameInfo info, GameSessionCallback callback) {
         if(this.state == GameSessionState.IN_PROGRESS) {
@@ -112,7 +87,7 @@ public class GameSession {
 
                 boolean playerWon = this.mode.playerStatus(current);
                 if (playerWon) {
-                    players.remove(current);
+                    removePlayer(current);
                 }
 
                 callback.onAccept(playerWon, info);
@@ -128,12 +103,12 @@ public class GameSession {
         }
     }
 
-    private void nextPlayer() {
+    protected void nextPlayer() {
         queueCounter++;
         notifyTurnChanges();
     }
 
-    private void update(GameInfo info) {
+    protected void update(GameInfo info) {
         Field oldf = this.board.getFieldMap().get(info.getOldFieldID());
         Field newf = this.board.getFieldMap().get(info.getNewFieldID());
 
@@ -147,9 +122,13 @@ public class GameSession {
     private void start() {
         this.queueCounter = randomGenerator.nextInt(this.getMaxQueue());
         this.board = createBoard(builder, players);
-        this.mode = new StandardGameMode(board);
+        this.mode = createMode();
         setState(GameSessionState.IN_PROGRESS);
     }
+
+
+
+    // MARK: Player management
 
     private int getMaxQueue() {
         return this.expectedPlayerCount;
@@ -180,11 +159,13 @@ public class GameSession {
         this.players.remove(p);
         this.expectedPlayerCount--;
         if (state == GameSessionState.IN_PROGRESS) {
-            if (getCurrentPlayer().getId() == p.getId()) {
-                nextPlayer();
+            if (this.players.size() < 2) {
+                setState(GameSessionState.DONE);
             }
         }
     }
+
+    // MARK: Observers
 
     public void addObserver(GameSessionObserver observer) {
         this.observers.add(observer);
@@ -194,32 +175,32 @@ public class GameSession {
         this.observers.remove(observer);
     }
 
-    public void notifyStateChanged() {
+    protected void notifyStateChanged() {
         for(GameSessionObserver o: observers) {
             o.onStateChange(this, getState());
         }
     }
 
-    public void notifyTurnChanges() {
-        for(GameSessionObserver o: observers) {
-            o.onPlayerChange(this, getCurrentPlayer());
+    protected void notifyTurnChanges() {
+        Player current = getCurrentPlayer();
+        if (current != null) {
+            for(GameSessionObserver o: observers) {
+                o.onPlayerChange(this, getCurrentPlayer());
+            }
         }
     }
 
-    public void notifyBoardUpdate(GameInfo info) {
+    protected void notifyBoardUpdate(GameInfo info) {
         for(GameSessionObserver o: observers) {
             o.onBoardUpdate(this, info);
         }
     }
 
-    //MARK: Getters/Setters
+
+    // MARK: Getters/Setters
 
     public GameMode getMode() {
         return mode;
-    }
-
-    public void setMode(GameMode mode) {
-        this.mode = mode;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -234,7 +215,7 @@ public class GameSession {
         return state;
     }
 
-    private void setState(GameSessionState state) {
+    protected void setState(GameSessionState state) {
         this.state = state;
         notifyStateChanged();
     }
@@ -254,4 +235,5 @@ public class GameSession {
     public void setTitle(String title) {
         this.title = title;
     }
+
 }
