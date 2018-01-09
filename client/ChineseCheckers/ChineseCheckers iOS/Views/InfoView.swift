@@ -21,15 +21,24 @@ class InfoView: UIView {
         case warning = "#FF9947"
         case error =  "#970023"
         case success = "#03BD5B"
+        case custom = "#000000"
     }
     
     // MARK: Properties
     private var _state: InfoViewState = InfoViewState.info {
         didSet {
-            let color = UIColor.hexStringToUIColor(hex: _state.rawValue)
-            backgroundView.borderColor = color
+            if _state != .custom {
+                let color = UIColor.hexStringToUIColor(hex: _state.rawValue)
+                _color = color
+            }
+        }
+    }
+    
+    private var _color: UIColor = UIColor.black {
+        didSet{
+            backgroundView.borderColor = _color
             backgroundView.backgroundColor = UIColor.rgba2rgb(background: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-                                                              color: color.withAlphaComponent(0.8))
+                                                              color: _color.withAlphaComponent(0.8))
         }
     }
     
@@ -41,6 +50,15 @@ class InfoView: UIView {
         }
         set {
             _state = newValue
+        }
+    }
+    
+    var color: UIColor {
+        get{
+            return _color
+        }
+        set{
+            _color = newValue
         }
     }
     

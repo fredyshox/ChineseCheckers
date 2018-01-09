@@ -54,6 +54,10 @@ class AddGameViewController: FormViewController {
         addButton.isEnabled = true
     }
     
+    @IBAction func cancel(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func addGame(_ sender: Any) {
         guard let titleRow = form.rowBy(tag: "title") as? TextRow,
               let countRow = form.rowBy(tag: "count") as? PickerInlineRow<Int>,

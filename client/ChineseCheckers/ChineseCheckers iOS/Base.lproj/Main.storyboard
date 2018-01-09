@@ -46,6 +46,11 @@
                         <viewLayoutGuide key="safeArea" id="fx9-up-cIp"/>
                     </view>
                     <navigationItem key="navigationItem" id="e5e-PC-CKq">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="zlT-kz-IoD">
+                            <connections>
+                                <action selector="cancel:" destination="lFb-2j-NUN" id="Vg0-j2-O7J"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" style="done" id="aka-Xv-Rbe">
                             <connections>
                                 <action selector="addGame:" destination="lFb-2j-NUN" id="mhu-qu-rBm"/>

@@ -180,7 +180,7 @@ class GameScene: SKScene {
     func createChecker(player: Player) -> HexagonNode {
         let node = HexagonNode(size: GameScene.hexSize)
         node.name = checkerName(player: player)
-        node.fillColor = checkerColor(zone: player.zoneID)
+        node.fillColor = GameScene.checkerColor(zone: player.zoneID)
         
         if self.player == player {
             self.playerNodes.append(node)
@@ -297,16 +297,16 @@ class GameScene: SKScene {
     #if os(iOS)
     public static let fieldColor: UIColor = UIColor.hexStringToUIColor(hex: "#939393")
     
-    func checkerColor(zone: Int) -> UIColor{
-    let colors = ["#00077A", "#03BD5B", "#BF0A46", "#FF9947", "#A939B9", "#000000"]
-    let hexString = colors[zone % 6]
-    
-    return UIColor.hexStringToUIColor(hex: hexString)
+    public static func checkerColor(zone: Int) -> UIColor{
+        let colors = ["#00077A", "#03BD5B", "#BF0A46", "#FF9947", "#A939B9", "#000000"]
+        let hexString = colors[zone % 6]
+        
+        return UIColor.hexStringToUIColor(hex: hexString)
     }
     #elseif os(OSX)
     public static let fieldColor: NSColor = NSColor.hexStringToNSColor(hex: "#939393")
     
-    func checkerColor(zone: Int) -> NSColor {
+    public static func checkerColor(zone: Int) -> NSColor {
         let colors = ["#00077A", "#03BD5B", "#BF0A46", "#FF9947", "#A939B9", "#000000"]
         let hexString = colors[zone % 6]
         

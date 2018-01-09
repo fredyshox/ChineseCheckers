@@ -24,6 +24,8 @@ class GamesTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "Available games"
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
         refresh(refreshControl!)
     }
     
@@ -76,6 +78,10 @@ class GamesTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64.0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

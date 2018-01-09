@@ -161,7 +161,9 @@ extension GameViewController: GameServiceDelegate {
         }
         log.info("yes")
         
-        self.infoView.state = .warning
+        self.infoView.state = .custom
+        self.infoView.color = GameScene.checkerColor(zone: player.zoneID)
+        
         let text: String = turnText(player)
         self.infoView.textLabel.text = text
         self.roundLabel.text = text
@@ -183,7 +185,8 @@ extension GameViewController: GameServiceDelegate {
         switch result.result {
         case .lost:
             self.infoView.state = .info
-            self.infoView.textLabel.text = "You lost"
+            self.infoView.textLabel.text = "Game has ended. You can now leave."
+            self.roundLabel.text = "Game has ended"
         case .won:
             self.infoView.state = .success
             self.infoView.textLabel.text = "You won"

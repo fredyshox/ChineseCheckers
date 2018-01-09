@@ -16,8 +16,6 @@
 		E21FD87C1FF13D7F00B97766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21FD87B1FF13D7F00B97766 /* AppDelegate.swift */; };
 		E21FD87E1FF13D7F00B97766 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21FD87D1FF13D7F00B97766 /* GameViewController.swift */; };
 		E21FD8811FF13D7F00B97766 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E21FD87F1FF13D7F00B97766 /* Main.storyboard */; };
-		E21FD8831FF13D7F00B97766 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E21FD85F1FF13D7F00B97766 /* Actions.sks */; };
-		E21FD8841FF13D7F00B97766 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E21FD85F1FF13D7F00B97766 /* Actions.sks */; };
 		E21FD8851FF13D7F00B97766 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E21FD8601FF13D7F00B97766 /* GameScene.sks */; };
 		E21FD8861FF13D7F00B97766 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E21FD8601FF13D7F00B97766 /* GameScene.sks */; };
 		E21FD8871FF13D7F00B97766 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21FD8611FF13D7F00B97766 /* GameScene.swift */; };
@@ -85,7 +83,6 @@
 		7723FBB429D1CE8FAE4B2CFB /* Pods-ChineseCheckers macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseCheckers macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseCheckers macOS/Pods-ChineseCheckers macOS.release.xcconfig"; sourceTree = "<group>"; };
 		C837BF2FD01580C29645DB94 /* Pods-ChineseCheckers macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseCheckers macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseCheckers macOS/Pods-ChineseCheckers macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		CCE9CDFC41394BFCD1F0922F /* Pods_ChineseCheckers_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChineseCheckers_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E21FD85F1FF13D7F00B97766 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		E21FD8601FF13D7F00B97766 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		E21FD8611FF13D7F00B97766 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		E21FD8621FF13D7F00B97766 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -195,7 +192,6 @@
 				E2F3AC1E1FF7265600B44941 /* Services */,
 				E252E4E91FF2F17D008DCC3D /* Logic */,
 				E2EA71FB1FFBEA4A00E0CDC9 /* Scenes */,
-				E21FD85F1FF13D7F00B97766 /* Actions.sks */,
 				E21FD8621FF13D7F00B97766 /* Assets.xcassets */,
 				E21FD8931FF1CF7D00B97766 /* HexagonNode.swift */,
 				E24026421FF471D00069D0FA /* HexagonNodeDelegate.swift */,
@@ -418,7 +414,6 @@
 				E21FD8851FF13D7F00B97766 /* GameScene.sks in Resources */,
 				E21FD8701FF13D7F00B97766 /* Main.storyboard in Resources */,
 				E286D8571FFAFF0A0002956A /* service.plist in Resources */,
-				E21FD8831FF13D7F00B97766 /* Actions.sks in Resources */,
 				E2A13B0C20026CA20049E129 /* InfoView.xib in Resources */,
 				E252E4F61FF329B6008DCC3D /* grid.json in Resources */,
 				E21FD8731FF13D7F00B97766 /* LaunchScreen.storyboard in Resources */,
@@ -435,7 +430,6 @@
 				E21FD8861FF13D7F00B97766 /* GameScene.sks in Resources */,
 				E21FD88A1FF13D7F00B97766 /* Assets.xcassets in Resources */,
 				E252E4F71FF329B6008DCC3D /* grid.json in Resources */,
-				E21FD8841FF13D7F00B97766 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

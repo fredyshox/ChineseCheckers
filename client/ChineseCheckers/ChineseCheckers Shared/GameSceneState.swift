@@ -52,7 +52,7 @@ class ListeningState: GameSceneState {
     func setUpPossibleHex(scene: GameScene, hex: HexagonNode) {
         hex.delegate = scene
         hex.lineWidth = GameScene.selectionLineWidth
-        hex.strokeColor = scene.checkerColor(zone: scene.player.zoneID)
+        hex.strokeColor = GameScene.checkerColor(zone: scene.player.zoneID)
     }
     
     func setPossibleVisibility(scene: GameScene, hex: HexagonNode) {
