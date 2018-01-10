@@ -8,6 +8,12 @@
 
 import SpriteKit
 
+/**
+ Enables to create objects for maintaining checker interactivity.
+ 
+ It's using state design pattern.
+ */
+
 protocol GameSceneState {
     func performMove(scene: GameScene, to hex: HexagonNode)
     func setPossibleVisibility(scene: GameScene, hex: HexagonNode);
@@ -20,6 +26,7 @@ extension GameSceneState {
         scene.state = state
     }
 }
+
 // TODO implementation
 class WaitingState: GameSceneState {
     private static var _shared: WaitingState?
@@ -34,6 +41,11 @@ class WaitingState: GameSceneState {
     func performMove(scene: GameScene, to hex: HexagonNode) { }
     func setPossibleVisibility(scene: GameScene, hex: HexagonNode) { }
 }
+
+/**
+ State object which is used when Scene is waiting for user to
+ select checker.
+ */
 
 class ListeningState: GameSceneState {
     private static var _shared: ListeningState?
@@ -71,6 +83,11 @@ class ListeningState: GameSceneState {
         self.changeState(scene: scene, state: SelectedHexState.shared)
     }
 }
+
+/**
+ State object which is used when user's choosen checker, and it enables
+ to perform move or clear selection.
+ */
 
 class SelectedHexState: GameSceneState {
     private static var _shared: SelectedHexState?

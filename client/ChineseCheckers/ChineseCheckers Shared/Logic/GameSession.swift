@@ -8,6 +8,12 @@
 
 import Foundation
 
+/**
+ An object being main class for game logic.
+ It's generating board from provided info and has references to players.
+ It can also provide possible moves and info about current turn.
+ */
+
 class GameSession {
     private let _board: Board
     private let _players: [Player]

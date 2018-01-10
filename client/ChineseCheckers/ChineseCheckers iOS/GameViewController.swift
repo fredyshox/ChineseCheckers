@@ -11,6 +11,11 @@ import SpriteKit
 import GameplayKit
 import SlidingSideView
 
+/**
+ A subclass of UIViewController responsible for presenting GameScene
+ and manipulating UI elements.
+ */
+
 class GameViewController: UIViewController {
     var service: GameService!
     

@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ The delegate of GameService can be notified about server responding by implementing
+ these methods.
+ */
 
 protocol GameServiceDelegate {
     func service(_ service: GameService, didReceiveError error: ErrorInfo)

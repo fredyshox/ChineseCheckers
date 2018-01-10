@@ -8,6 +8,11 @@
 
 import Foundation
 
+/**
+ To be notified about interaction events of HexagonNode object,
+ conform this protocol and implement provided methods.
+ */
+
 protocol HexagonNodeDelegate {
     func hexNodeClicked(_ node: HexagonNode)
 }

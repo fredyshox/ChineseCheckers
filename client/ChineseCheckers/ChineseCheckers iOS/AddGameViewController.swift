@@ -10,6 +10,10 @@ import UIKit
 import Eureka
 import MBProgressHUD
 
+/**
+ Game creation UI.
+ */
+
 class AddGameViewController: FormViewController {
     
     @IBOutlet weak var addButton: UIBarButtonItem!

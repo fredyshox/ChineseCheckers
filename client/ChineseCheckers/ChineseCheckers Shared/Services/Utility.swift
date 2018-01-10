@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ Set of utility functions.
+ */
+
 class Utility {
     static func readPlist(name: String) -> [String:Any] {
         let plistPath = Bundle.main.path(forResource: name, ofType: "plist")!

@@ -9,6 +9,10 @@
 import Foundation
 import Alamofire
 
+/**
+ An Object responsible for making requests to game http server.
+ It uses url & port from service.plist file.
+ */
 
 class DataService {
     

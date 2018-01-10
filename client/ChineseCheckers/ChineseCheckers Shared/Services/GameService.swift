@@ -9,9 +9,15 @@
 import Foundation
 import CocoaAsyncSocket
 
+/**
+ An object responsible for maintaining socket connection with game server.
+ 
+ It uses url & port from service.plist file.
+ */
+
 class GameService: NSObject{
     
-    //properties
+    // MARK: Properties
     fileprivate static let serviceData: [String:Any] = Utility.readPlist(name: "service")
     fileprivate var _session: GameSession! {
         didSet {
@@ -22,13 +28,13 @@ class GameService: NSObject{
     }
     fileprivate var _socket: GCDAsyncSocket!
     
-    //utility
+    // MARK: Utility
     fileprivate let encoder: JSONEncoder = JSONEncoder()
     fileprivate let decoder: JSONDecoder = JSONDecoder()
     
     fileprivate let separator: Data = "\r\n".data(using: .utf8)!
     
-    //
+    //...
     fileprivate var _delegate: GameServiceDelegate?
     fileprivate var _playerID: Int?
     fileprivate var _currentTurn: TurnInfo? {
@@ -144,6 +150,8 @@ class GameService: NSObject{
  
     
 }
+
+// MARK: GCDAsyncSocketDelegate
 
 extension GameService: GCDAsyncSocketDelegate {
     func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {

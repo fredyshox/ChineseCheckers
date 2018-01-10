@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+/**
+ SpriteKit Node object representing Hexagonal shape.
+ */
+
 class HexagonNode: SKShapeNode {
     fileprivate let _radius: CGFloat
     fileprivate var _delegate: HexagonNodeDelegate?

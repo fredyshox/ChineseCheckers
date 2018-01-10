@@ -8,6 +8,10 @@
 
 import UIKit
 
+/**
+ A table view cell for presenting SessionInfo.
+ */
+
 class GameTableViewCell: UITableViewCell {
     
     var sessionInfo: SessionInfo? {

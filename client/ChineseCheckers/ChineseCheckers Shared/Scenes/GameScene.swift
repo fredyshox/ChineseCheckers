@@ -8,6 +8,14 @@
 
 import SpriteKit
 
+/**
+ Main scene of the game. Draws the board described in GameSession.
+ Enables user interaction with board like moving camera with pan gesture.
+ Controls interactivity of field nodes.
+ 
+ As a delegate of GameSession, it also updated graphics to match game logic state changes.
+ */
+
 class GameScene: SKScene {
     
     fileprivate var _service: GameService!

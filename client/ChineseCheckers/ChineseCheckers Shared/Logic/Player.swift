@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ Data class representing player.
+ */
+
 class Player: Equatable {
     private let _id: Int
     private let _username: String

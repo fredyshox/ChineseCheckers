@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ An Object representing game's board graph structure.
+ */
+
 class Board {
     private var _fields: [Int: Field]
     private var _startID: Int

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class InfoView: UIView {
 
     // MARK: UI elements

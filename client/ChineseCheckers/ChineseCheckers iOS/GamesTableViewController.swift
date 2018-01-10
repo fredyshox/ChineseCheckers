@@ -9,6 +9,10 @@
 import UIKit
 import MBProgressHUD
 
+/**
+ A subclass of UITableViewController responsible for listing available games.
+ */
+
 class GamesTableViewController: UITableViewController {
     
     var games: [SessionInfo] = [] {

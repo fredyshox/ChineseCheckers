@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ An data object representing field in Board structure.
+ */
+
 class Field {
     enum Direction: Int {
         case topRight = 0

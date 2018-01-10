@@ -8,6 +8,10 @@
 
 import UIKit
 
+/**
+ UIView with rounded corners.
+ */
+
 @IBDesignable
 class RoundView: UIView {
     
