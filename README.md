@@ -32,9 +32,9 @@ Libraries used:
 
 ### Structure
 
-* [Game session login activity UML][game-uml]
+* [Game session login activity UML][login-uml]
 
-* [Actual game management UML][login-uml]
+* [Actual game management UML][game-uml]
 
 ## Client
 
