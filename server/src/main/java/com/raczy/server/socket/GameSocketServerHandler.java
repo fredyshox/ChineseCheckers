@@ -133,9 +133,11 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
         int gameId = ch.attr(GameServer.GAME_ID).get();
         Player player = ch.attr(GameServer.PLAYER_KEY).get();
 
-        ErrorMessage err = new ErrorMessage(player.getUsername() + " disconnected.");
-        channelGroups.get(gameId).writeAndFlush(err.toJson());
-
+        ChannelGroup group = channelGroups.get(gameId);
+        if (group != null) {
+            ErrorMessage err = new ErrorMessage(player.getUsername() + " disconnected.");
+            channelGroups.get(gameId).writeAndFlush(err.toJson());
+        }
 
         //FIXME: error here
         //end the game?
@@ -185,6 +187,11 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
         return session.getId();
     }
 
+    private void deleteGame(int id) {
+        games.remove(id);
+        channelGroups.remove(id);
+    }
+
 
     private void addPlayer(Player player, int gameID) {
         GameSession game = games.get(gameID);
@@ -222,7 +229,11 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
     private void sendFinalMessage(GameSession session) {
         ChannelGroup channelGroup = channelGroups.get(session.getId());
         Message msg = new ResultMessage(-1, ResultMessage.Result.DONE);
-        channelGroup.writeAndFlush(msg.toJson());
+
+        channelGroup.writeAndFlush(msg.toJson()).addListener((future) -> {
+           channelGroup.disconnect();
+           deleteGame(session.getId());
+        });
     }
 
 

@@ -5,7 +5,9 @@ import com.raczy.chinesecheckers.Field;
 import com.raczy.chinesecheckers.builder.BoardBuilder;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Standard implementation of BoardBuilder interface
@@ -116,8 +118,15 @@ public class StandardBoardBuilder extends BoardBuilder {
         //specifying edge specific hook sides
 
         Map<Integer, Field> playerFields = generatePlayerGraph(fields, edges);
+
+        if (this.playerZonesMap.containsKey(side)) {
+            Set<Integer> keySet=  this.playerZonesMap.get(side).keySet();
+            this.mainFieldMap.keySet().removeAll(keySet);
+        }else {
+            this.mainFieldMap.putAll(playerFields);
+        }
+
         this.playerZonesMap.put(side, playerFields);
-        this.mainFieldMap.putAll(playerFields);
     }
 
     @Override

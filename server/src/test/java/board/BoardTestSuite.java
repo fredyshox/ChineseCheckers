@@ -12,7 +12,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         EdgeLR_BoardTest.class,
         EdgeBLTR_BoardTest.class,
-        EdgeBRTL_BoardTest.class
+        EdgeBRTL_BoardTest.class,
+        PlayerZones_BoardTest.class
 })
 
 public class BoardTestSuite {
