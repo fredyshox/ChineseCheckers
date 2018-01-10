@@ -28,12 +28,12 @@ import java.util.Map;
 @ChannelHandler.Sharable
 public class GameSocketServerHandler extends SimpleChannelInboundHandler<String> implements GameSessionObserver, GameHandlerAdapter {
 
-    private static Logger log = LogManager.getLogger(GameSocketServerHandler.class);
-    private Gson gson = Utility.getGson();
+    private final static Logger log = LogManager.getLogger(GameSocketServerHandler.class);
+    private final Gson gson = Utility.getGson();
 
     // MARK: Properties
-    private Map<Integer, GameSession> games;
-    private Map<Integer, ChannelGroup> channelGroups;
+    private final Map<Integer, GameSession> games;
+    private final Map<Integer, ChannelGroup> channelGroups;
 
     public GameSocketServerHandler() {
         super();
@@ -157,7 +157,7 @@ public class GameSocketServerHandler extends SimpleChannelInboundHandler<String>
             public void onAccept(Boolean won, GameInfo gameInfo) {
                 GameInfoMessage message = new GameInfoMessage(gameInfo);
                 String json = message.toJson();
-                ChannelGroupFuture future = channelGroup.writeAndFlush(json);
+                channelGroup.writeAndFlush(json);
 
                 if(won) {
                     //session listener for this?

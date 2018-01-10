@@ -22,9 +22,9 @@ import org.apache.logging.log4j.Logger;
 @ChannelHandler.Sharable
 public class LoginSocketServerHandler extends SimpleChannelInboundHandler<String>{
 
-    private static Logger log = LogManager.getLogger(LoginSocketServerHandler.class);
-    private Gson gson = Utility.getGson();
-    private GraphIDGenerator playerIDGenerator = new GraphIDGenerator();
+    private final static Logger log = LogManager.getLogger(LoginSocketServerHandler.class);
+    private final Gson gson = Utility.getGson();
+    private final GraphIDGenerator playerIDGenerator = new GraphIDGenerator();
     private GameHandlerAdapter delegate;
 
     @Override

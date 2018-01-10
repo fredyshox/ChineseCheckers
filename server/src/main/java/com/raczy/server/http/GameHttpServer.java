@@ -7,14 +7,15 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
+ * Responsible for set up and start of http server
  * Created by kacperraczy on 06.01.2018.
  */
 public class GameHttpServer implements Runnable {
 
-    private int port;
+    private final int port;
     private GameHttpServerInitializer initializer;
 
-    public GameHttpServer(int port) {
+    public GameHttpServer(final int port) {
         this.port = port;
     }
 

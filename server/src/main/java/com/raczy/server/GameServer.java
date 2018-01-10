@@ -18,7 +18,7 @@ public class GameServer {
     private int socketPort = DEFAULT_SOCKET_PORT;
     private int httpPort = DEFAULT_HTTP_PORT;
 
-    private ArrayList<Thread> servers = new ArrayList<>();
+    private final ArrayList<Thread> servers = new ArrayList<>();
 
     /* Default ports */
     public final static int DEFAULT_HTTP_PORT = 1337;
@@ -38,11 +38,11 @@ public class GameServer {
 
     public GameServer(){}
 
-    public GameServer(int socketPort) {
+    public GameServer(final int socketPort) {
         this.socketPort = socketPort;
     }
 
-    public GameServer(int socketPort, int httpPort) {
+    public GameServer(final int socketPort, final int httpPort) {
         this.socketPort = socketPort;
         this.httpPort = httpPort;
     }

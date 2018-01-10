@@ -27,7 +27,7 @@ import java.util.Map;
  */
 public class Utility {
 
-    protected static Logger log = LogManager.getLogger(Utility.class);
+    protected final static Logger log = LogManager.getLogger(Utility.class);
 
     //test client data generating program
     public static void main(String[] args) {
@@ -127,7 +127,7 @@ public class Utility {
                 }
                 writer.name("neighbours");
                 writer.beginObject();
-                for(i = 0; i<temp.getNeighbours().length; i++) {
+                for(i = 0; i < temp.getNeighbours().length; i++) {
                     temp2 = temp.getNeighbours()[i];
                     if(temp2 != null) {
                         writer.name(Integer.toString(i)).value(Integer.toString(temp2.getId()));

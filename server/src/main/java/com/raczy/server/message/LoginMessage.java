@@ -8,10 +8,10 @@ import com.raczy.utility.JsonRequired;
 public class LoginMessage extends Message {
 
     @JsonRequired
-    private String username;
+    private final String username;
 
     @JsonRequired
-    private int gameID;
+    private final int gameID;
 
     public LoginMessage(int gameID, String username) {
         super("login");

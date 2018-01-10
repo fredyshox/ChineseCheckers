@@ -7,21 +7,23 @@ import java.util.Arrays;
  * Created by kacperraczy on 12.12.2017.
  */
 public class Field {
-    public static int TOPRIGHT = 0;
-    public static int RIGHT = 1;
-    public static int BOTTOMRIGHT = 2;
-    public static int BOTTOMLEFT = 3;
-    public static int LEFT = 4;
-    public static int TOPLEFT = 5;
+    public final static int TOPRIGHT = 0;
+    public final static int RIGHT = 1;
+    public final static int BOTTOMRIGHT = 2;
+    public final static int BOTTOMLEFT = 3;
+    public final static int LEFT = 4;
+    public final static int TOPLEFT = 5;
 
-    private int id;
+    public final static int NEIGHBOUR_COUNT = 6;
+
+    private final int id;
     private Field[] neighbours;
     private Player player = null;
 
-    public Field(int id) {
+    public Field(final int id) {
         this.id = id;
 
-        Field[] neighbours = new Field[6];
+        Field[] neighbours = new Field[NEIGHBOUR_COUNT];
         Arrays.fill(neighbours, null);
         this.neighbours = neighbours;
     }
@@ -47,7 +49,7 @@ public class Field {
     }
 
     public static int oppositeEdge(int eno) {
-        return (eno + 3) % 6;
+        return (eno + 3) % NEIGHBOUR_COUNT;
     }
 
 }

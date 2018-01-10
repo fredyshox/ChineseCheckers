@@ -11,11 +11,16 @@ import org.apache.logging.log4j.Logger;
  */
 public abstract class BoardBuilder {
     static Logger logger = LogManager.getLogger();
-    protected GraphIDGenerator gen = new GraphIDGenerator();
+    private final GraphIDGenerator gen = new GraphIDGenerator();
 
     public abstract void generateMainBoardPart();
     public abstract void generatePlayerBoardPart(int side);
 
     public abstract Board getResult();
+
+
+    public GraphIDGenerator getGen() {
+        return gen;
+    }
 
 }

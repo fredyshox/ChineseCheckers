@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Message {
 
-    protected static Logger log = LogManager.getLogger(Message.class);
+    protected final static Logger log = LogManager.getLogger(Message.class);
 
     @JsonRequired
     private final String type;

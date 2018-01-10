@@ -10,20 +10,20 @@ import java.util.Date;
  */
 public class GameInfo {
     @JsonRequired
-    private Date createdAt;
+    private final Date createdAt;
     @JsonRequired
-    private int oldFieldID;
+    private final int oldFieldID;
     @JsonRequired
-    private int newFieldID;
+    private final int newFieldID;
 
     public GameInfo(Date date, int oldf, int newf) {
-        this.createdAt = date;
+        this.createdAt = new Date(date.getTime());
         this.oldFieldID = oldf;
         this.newFieldID = newf;
     }
 
     public Date getCreatedAt() {
-        return createdAt;
+        return new Date(createdAt.getTime());
     }
 
     public int getOldFieldID() {

@@ -5,7 +5,7 @@ package com.raczy.server.message;
  */
 public class ErrorMessage extends Message {
 
-    private String cause;
+    private final String cause;
 
     public ErrorMessage(String msg) {
         super("error");

@@ -19,24 +19,24 @@ import java.util.Random;
  * Created by kacperraczy on 08.01.2018.
  */
 public abstract class GameSession {
-    protected static Logger log = LogManager.getLogger(GameSession.class);
-    private static GraphIDGenerator idGenerator = new GraphIDGenerator();
-    private Random randomGenerator = new Random();
+    protected final static Logger log = LogManager.getLogger(GameSession.class);
+    private final static GraphIDGenerator idGenerator = new GraphIDGenerator();
+    private final Random randomGenerator = new Random();
 
 
     //MARK: Properties
 
-    private int id;
+    private final int id;
     private String title;
 
-    private ArrayList<Player> players;
+    private final ArrayList<Player> players;
+    private final BoardBuilder builder;
     private int expectedPlayerCount;
-    private BoardBuilder builder;
     private Board board;
     private GameMode mode;
     private GameSessionState state;
 
-    private ArrayList<GameSessionObserver> observers = new ArrayList<>();
+    private final ArrayList<GameSessionObserver> observers = new ArrayList<>();
 
     private int queueCounter;
 

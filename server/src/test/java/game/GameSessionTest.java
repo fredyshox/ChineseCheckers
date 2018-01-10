@@ -109,12 +109,10 @@ public class GameSessionTest {
         Field temp2 = null;
         for(Field f: map.values()) {
             for(Field n: f.getNeighbours()) {
-                if (n != null) {
-                    if (n.getChecker() == null) {
-                        temp = f;
-                        temp2 = n;
-                        break;
-                    }
+                if (n != null && n.getChecker() == null) {
+                    temp = f;
+                    temp2 = n;
+                    break;
                 }
             }
 

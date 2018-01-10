@@ -11,7 +11,7 @@ import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
 
 /**
- * Socket channel initializer
+ * Socket channel initializer. Adds necessary encoders/decoders and passes them to appropriate handler.
  * Created by kacperraczy on 21.12.2017.
  */
 

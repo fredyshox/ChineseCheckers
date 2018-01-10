@@ -9,8 +9,8 @@ public class ResultMessage extends Message {
         WON, DONE
     }
 
-    private int playerID;
-    private Result result;
+    private final int playerID;
+    private final Result result;
 
     public ResultMessage(int playerID, Result result) {
         super("result");

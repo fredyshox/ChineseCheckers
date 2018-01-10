@@ -11,7 +11,7 @@ public class GraphIDGenerator {
     }
 
     public int generate() {
-        current+=1;
+        current += 1;
         return current;
     }
 }

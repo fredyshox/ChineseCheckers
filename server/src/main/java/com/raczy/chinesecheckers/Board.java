@@ -12,10 +12,12 @@ import org.apache.logging.log4j.LogManager;
  * Created by kacperraczy on 10.12.2017.
  */
 public class Board {
+
+    private final static Logger logger = LogManager.getLogger(Board.class);
+
     private Map<Integer, Field> fieldMap;
     private Map<Integer, Map<Integer, Field>> playerZones;
-    private int playerNo;
-    private static Logger logger = LogManager.getLogger(Board.class);
+    private final int playerNo;
 
     public Board(int playerNo) {
         this.playerNo = playerNo;

@@ -5,8 +5,8 @@ package com.raczy.chinesecheckers;
  * Created by kacperraczy on 12.12.2017.
  */
 public class Player {
-    private int id;
-    private String username;
+    private final int id;
+    private final String username;
     private int zoneID;
 
     public Player(int id, String username) {

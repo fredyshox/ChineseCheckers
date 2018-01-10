@@ -7,15 +7,15 @@ import com.raczy.utility.JsonRequired;
  */
 public class SessionMessage extends Message {
 
-    private int gameID;
+    private final int gameID;
 
     @JsonRequired
-    private String title;
+    private final String title;
 
     @JsonRequired
-    private int playerCount;
+    private final int playerCount;
 
-    private int currentPlayerCount;
+    private final int currentPlayerCount;
 
     public SessionMessage(int gameID, String title, int playerNo, int currentPlayerNo) {
         super("game");

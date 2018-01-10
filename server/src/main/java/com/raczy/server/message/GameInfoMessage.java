@@ -9,9 +9,9 @@ import com.raczy.utility.JsonRequired;
 public class GameInfoMessage extends Message {
 
     @JsonRequired
-    private GameInfo info;
+    private final GameInfo info;
 
-    public GameInfoMessage(GameInfo info) {
+    public GameInfoMessage(final GameInfo info) {
         super("info");
         this.info = info;
     }

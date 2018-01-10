@@ -24,8 +24,8 @@ import java.util.ArrayList;
  */
 public class GameHttpServerHandler extends SimpleChannelInboundHandler<Object> {
 
-    private static Logger log = LogManager.getLogger(GameHttpServerHandler.class);
-    private static  Gson gson = Utility.getGson();
+    private final static Logger log = LogManager.getLogger(GameHttpServerHandler.class);
+    private final static  Gson gson = Utility.getGson();
     private GameHandlerAdapter delegate;
 
     private HttpRequest request;

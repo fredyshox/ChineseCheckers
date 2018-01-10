@@ -5,7 +5,7 @@ package com.raczy.server.message;
  */
 public class TurnMessage extends Message{
 
-    private int playerID;
+    private final int playerID;
 
     public TurnMessage(int playerID) {
         super("turn");

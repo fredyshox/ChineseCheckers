@@ -14,7 +14,7 @@ import java.util.Set;
  * Created by kacperraczy on 11.12.2017.
  */
 public class StandardBoardBuilder extends BoardBuilder {
-    private Integer[][] mainBoardEdgeVertex = { {0, 1, 2, 3, 4},
+    private final Integer[][] mainBoardEdgeVertex = { {0, 1, 2, 3, 4},
                                                 {4, 10, 17, 25, 34},
                                                 {34, 42, 49, 55, 60},
                                                 {60, 59, 58, 57, 56},
@@ -33,7 +33,7 @@ public class StandardBoardBuilder extends BoardBuilder {
         Field temp;
         while (niter <= 9) {
             for(i = 0; i < niter; i++) {
-                current = new Field(gen.generate());
+                current = new Field(getGen().generate());
 
                 if (i == 0) {
                     //first
@@ -67,7 +67,7 @@ public class StandardBoardBuilder extends BoardBuilder {
         niter -= 2;
         while(niter >= 5) {
             for (i = 0; i<niter; i++) {
-                current = new Field(gen.generate());
+                current = new Field(getGen().generate());
 
                 temp = fieldMap.get(current.getId() - niter - 1);
                 connectNodes(Field.TOPLEFT, current, temp);
@@ -152,7 +152,7 @@ public class StandardBoardBuilder extends BoardBuilder {
         while(niter > 0) {
 
             for(int i = 0; i < niter; i++) {
-                current = new Field(gen.generate());
+                current = new Field(getGen().generate());
 
                 if (i != 0) {
                     temp = result.get(current.getId() - 1);
@@ -184,7 +184,7 @@ public class StandardBoardBuilder extends BoardBuilder {
         return result;
     }
 
-    private class Edges {
+    private static class Edges {
         int connector;
         int edge1;
         int edge2;

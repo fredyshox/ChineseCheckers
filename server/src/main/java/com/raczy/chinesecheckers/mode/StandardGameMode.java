@@ -12,7 +12,7 @@ import java.util.*;
  * Created by kacperraczy on 12.12.2017.
  */
 public class StandardGameMode implements GameMode {
-    private Board board;
+    private final Board board;
 
     public StandardGameMode(Board board) {
         this.board = board;

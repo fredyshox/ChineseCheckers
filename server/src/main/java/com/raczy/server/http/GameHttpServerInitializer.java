@@ -9,6 +9,7 @@ import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
 
 /**
+ * Adds necessary encoders/decoders/handlers to newly created channel.
  * Created by kacperraczy on 06.01.2018.
  */
 public class GameHttpServerInitializer extends ChannelInitializer<SocketChannel> {

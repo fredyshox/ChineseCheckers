@@ -12,7 +12,7 @@ import java.io.StringWriter;
  */
 public class InitialMessage extends Message {
 
-    private GameSession session;
+    private final GameSession session;
 
     public InitialMessage(GameSession session){
         super("init");

@@ -8,6 +8,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
+ * Responsible for set up and start of socket server.
  * Created by kacperraczy on 06.01.2018.
  */
 public class GameSocketServer implements Runnable {
