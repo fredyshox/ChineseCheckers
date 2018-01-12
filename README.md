@@ -2,6 +2,8 @@
 
 Online multiplayer game with Java server and iOS/macOS client.
 
+Based on classic board game (https://en.wikipedia.org/wiki/Chinese_checkers).
+
 Created as university project for 'Programming technology' class.
 
 ## Game Logic
@@ -40,6 +42,8 @@ Libraries used:
 
 Client is written for iOS platform (macOS version not yet optimized) using SpriteKit framework.
 
+![](client-gif)
+
 ### Libraries 
 
 Programming Langugage: 
@@ -51,6 +55,8 @@ Libraries:
 * Alamofire (https://github.com/Alamofire/Alamofire)
 * UI libs -> see [podfile](https://github.com/fredyshox/TP-Project/blob/master/client/ChineseCheckers/Podfile) 
 
+
 [login-uml]: ./img/login-activity-uml.png
 [game-uml]: ./img/game-activity-uml.png
 [class-uml]: ./img/class-uml.png
+[client-gif]: ./img/client-demo.gif
