@@ -42,7 +42,7 @@ Libraries used:
 
 Client is written for iOS platform (macOS version not yet optimized) using SpriteKit framework.
 
-![](client-gif)
+![](./img/client-demo.gif)
 
 ### Libraries 
 
@@ -59,4 +59,3 @@ Libraries:
 [login-uml]: ./img/login-activity-uml.png
 [game-uml]: ./img/game-activity-uml.png
 [class-uml]: ./img/class-uml.png
-[client-gif]: ./img/client-demo.gif
